@@ -1,5 +1,6 @@
 Quick notes:
 
+- create database for emails, run migrations to create tables
 - For sending messages, .env must be set correctly
 - Use https://dashboard.ngrok.com/endpoints to expose localhost to internet (if you dont have ngrok, install it and run it)
 - Run ngrok with port 80 (ngrok http 8000) since it is the apache port = ask david if this is ok or should be changed to 8000 (artisan serve) or 5173 (vite)
