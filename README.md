@@ -1,5 +1,6 @@
-Quick notes:
+How to use:
 
+- clone repository into your folder and run all steps from https://classes.codingbootcamp.cz/coding-bootcamp/wd-autumn-2024/1462-laravel-checklist
 - Run XAMPP; make sure that Apache is running on port 80
 - Create database called **email**, run migrations to create tables for sent and receied emails
 - For sending messages, .env must be set correctly (is already done in this template)
