@@ -1,5 +1,6 @@
 Quick notes:
 
+- Run XAMPP
 - Create database for emails, run migrations to create tables
 - For sending messages, .env must be set correctly
 - Use https://dashboard.ngrok.com/endpoints to expose localhost to internet (if you dont have ngrok, install it and run it)
