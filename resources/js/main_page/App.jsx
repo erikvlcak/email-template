@@ -1,8 +1,7 @@
 
-
 function App(){
     return(
-        <h1>someething</h1>
+        <h1>something</h1>
     )
 }
 
