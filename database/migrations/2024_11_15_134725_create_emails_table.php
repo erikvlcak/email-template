@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->foreign('sender_id');
-            $table->foreign('folder_id');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('folder_id');
             $table->string('subject')->nullable();
             $table->string('body')->nullable();
             $table->string('html')->nullable();
