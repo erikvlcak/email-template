@@ -16,11 +16,15 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('folder_id');
             $table->string('subject')->nullable();
-            $table->string('body')->nullable();
-            $table->string('html')->nullable();
-            $table->boolean('is_starred');
-            $table->boolean('is_important');
+            $table->text('body')->nullable();
+            $table->text('html')->nullable();
+            $table->boolean('is_starred')->default(false);
+            $table->boolean('is_important')->default(false);
             $table->timestamps();
+
+
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('cascade');
         });
     }
 
