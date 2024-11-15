@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('recipients', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email')->index();
-            $table->string('phone')->nullable();
-            $table->string('password');
-            $table->string('image')->nullable();
+            $table->unsignedBigInteger('email_id');
+            $table->string('receiver_email');
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
+
+            // Define foreign key constraint
+            $table->foreign('email_id')->references('id')->on('emails')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('recipients');
     }
 };
