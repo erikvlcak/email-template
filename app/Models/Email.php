@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Folder;
+use App\Models\User;
+use App\Models\Recipient;
 
 class Email extends Model
 {
