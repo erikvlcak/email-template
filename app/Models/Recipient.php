@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recipient extends Model
 {
-    public function email()
+    public function emails()
     {
-        return $this->hasOne(Email::class);
+        return $this->hasMany(Email::class);
     }
 }

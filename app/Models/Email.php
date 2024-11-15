@@ -13,7 +13,7 @@ class Email extends Model
 
    public function recipients()
    {
-    return $this->belongsTo(Recipient::class);
+    return $this->belongsToMany(Recipient::class);
    }
 
    public function folder()
