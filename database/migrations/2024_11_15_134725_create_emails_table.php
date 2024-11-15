@@ -13,18 +13,14 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sender_id');
-            $table->unsignedBigInteger('folder_id');
+            $table->foreignId('sender_id');
+            $table->foreignId('folder_id');
             $table->string('subject')->nullable();
             $table->text('body')->nullable();
             $table->text('html')->nullable();
             $table->boolean('is_starred')->default(false);
             $table->boolean('is_important')->default(false);
             $table->timestamps();
-
-
-            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('cascade');
         });
     }
 

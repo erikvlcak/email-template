@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('email_id');
+            $table->foreignId('email_id');
             $table->string('receiver_email');
             $table->boolean('is_read')->default(false);
             $table->timestamps();
-
-            // Define foreign key constraint
-            $table->foreign('email_id')->references('id')->on('emails')->onDelete('cascade');
         });
     }
 
