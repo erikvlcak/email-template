@@ -5,7 +5,7 @@ use App\Http\Controllers\MailController;
 
 
 Route::get('/', function () {
-    return view('emails.createmail');
+    return view('index');
 });
 
 Route::post('/send-email', [MailController::class, 'sendEmail'])->name('send.email');
