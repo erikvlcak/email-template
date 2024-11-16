@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('email_recipient', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('email_id');
-            $table->foreignId('recipient_id');
+            $table->foreignId('email_id')->constrained('emails')->onDelete('cascade');
+            $table->foreignId('recipient_id')->constrained('recipients')->onDelete('cascade');
             $table->timestamps();
 
             // Define unique constraints

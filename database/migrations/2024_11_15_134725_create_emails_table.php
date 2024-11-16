@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id');
-            $table->foreignId('folder_id');
+            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('folder_id')->constrained('folders')->onDelete('cascade');
             $table->string('subject')->nullable();
             $table->text('body')->nullable();
             $table->text('html')->nullable();
