@@ -1,5 +1,5 @@
 <?php
-
+// app/Http/Controllers/MailController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,7 +7,6 @@ use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Email;
 use App\Models\Recipient;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class MailController extends Controller
