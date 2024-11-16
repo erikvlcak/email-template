@@ -7,6 +7,7 @@ const Dashboard = () => {
     const [body, setBody] = useState("");
     const [status, setStatus] = useState("");
     const [emails, setEmails] = useState([]);
+    const [inbox, setInbox] = useState([]);
 
     useEffect(() => {
         fetchEmails();
@@ -18,6 +19,15 @@ const Dashboard = () => {
             setEmails(response.data);
         } catch (error) {
             console.error("Error fetching emails:", error);
+        }
+    };
+
+    const fetchInbox = async () => {
+        try {
+            const response = await axios.get("/api/fetch-inbox");
+            setInbox(response.data);
+        } catch (error) {
+            console.error("Error fetching inbox:", error);
         }
     };
 
@@ -79,7 +89,19 @@ const Dashboard = () => {
                             .join(", ")}{" "}
                         <br />
                         <strong>Subject:</strong> {email.subject} <br />
-                        <strong>Body:</strong> {email.body}
+                        <strong>Body:</strong> {email.body} <br />
+                        <strong>Star:</strong> {email.is_starred} <br />
+                    </li>
+                ))}
+            </ul>
+            <button onClick={fetchInbox}>Refresh Inbox</button>
+            <h2>Inbox</h2>
+            <ul>
+                {inbox.map((email) => (
+                    <li key={email.id}>
+                        <strong>From:</strong> {email.sender_email} <br />
+                        <strong>Subject:</strong> {email.subject} <br />
+                        <strong>Body:</strong> {email.body} <br />
                     </li>
                 ))}
             </ul>
