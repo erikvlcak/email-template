@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import "froala-editor/js/froala_editor.pkgd.min.js";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-import "froala-editor/css/froala_style.min.css";
-import FroalaEditor from "react-froala-wysiwyg";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
+import "../../css/style.scss";
 
 const Editor = ({ onEmailSent }) => {
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
-
-    const handleModelChange = (model) => {
-        setContent(model);
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,10 +49,13 @@ const Editor = ({ onEmailSent }) => {
                 </div>
                 <div>
                     <label>Body:</label>
-                    <FroalaEditor
-                        tag="textarea"
-                        model={content}
-                        onModelChange={handleModelChange}
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data={content}
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setContent(data);
+                        }}
                     />
                 </div>
                 <button type="submit">Send</button>
