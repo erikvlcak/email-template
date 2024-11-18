@@ -7,7 +7,7 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
-        "axios": "^1.7.4",
+        "axios": "^1.7.7",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.47",
@@ -19,7 +19,10 @@
         "froala-editor": "^4.3.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-froala-wysiwyg": "^4.3.0",
+        "react-router-dom": "^6.28.0",
+        "router": "^2.0.0",
+      "react-froala-wysiwyg": "^4.3.0",
+
         "sass": "^1.81.0"
     }
 }
