@@ -16,8 +16,10 @@
     },
     "dependencies": {
         "@vitejs/plugin-react": "^4.3.3",
+        "froala-editor": "^4.3.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
+        "react-froala-wysiwyg": "^4.3.0",
         "sass": "^1.81.0"
     }
 }

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Editor from "../components/Editor";
 
 const Dashboard = () => {
-    const [email, setEmail] = useState("");
-    const [subject, setSubject] = useState("");
-    const [body, setBody] = useState("");
-    const [status, setStatus] = useState("");
     const [emails, setEmails] = useState([]);
     const [inbox, setInbox] = useState([]);
 
@@ -31,54 +28,10 @@ const Dashboard = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post("/send-email", {
-                address: email,
-                subject,
-                text: body,
-            });
-            setStatus("Email sent successfully!");
-            fetchEmails(); // Refresh the email list
-        } catch (error) {
-            setStatus("Failed to send email.");
-        }
-    };
-
     return (
         <div>
-            <h2>Send Email</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Subject:</label>
-                    <input
-                        type="text"
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Body:</label>
-                    <textarea
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        required
-                    ></textarea>
-                </div>
-                <button type="submit">Send Email</button>
-            </form>
-            {status && <p>{status}</p>}
+            <h1>Dashboard</h1>
+            <Editor onEmailSent={fetchEmails} />
             <h2>Sent Emails</h2>
             <ul>
                 {emails.map((email) => (
@@ -90,7 +43,8 @@ const Dashboard = () => {
                         <br />
                         <strong>Subject:</strong> {email.subject} <br />
                         <strong>Body:</strong> {email.body} <br />
-                        <strong>Star:</strong> {email.is_starred} <br />
+                        <strong>Star:</strong> {email.is_starred ? "Yes" : "No"}{" "}
+                        <br />
                     </li>
                 ))}
             </ul>
