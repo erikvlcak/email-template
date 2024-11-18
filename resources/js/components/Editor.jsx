@@ -31,10 +31,10 @@ const Editor = ({ onEmailSent, onClose }) => {
             <button className="close-button" onClick={onClose}>
                 X
             </button>
-            <h2>Compose Message</h2>
+            {subject ? <h2>Subject: {subject}</h2> : <h2>Compose message</h2>}
             <form onSubmit={handleSubmit} className="editor-content">
                 <div>
-                    <label>Email:</label>
+                    <label>Send to:</label>
                     <input
                         type="email"
                         value={email}
@@ -52,7 +52,7 @@ const Editor = ({ onEmailSent, onClose }) => {
                     />
                 </div>
                 <div className="editor-content">
-                    <label>Body:</label>
+                    <label>Message:</label>
                     <CKEditor
                         editor={ClassicEditor}
                         data={content}
