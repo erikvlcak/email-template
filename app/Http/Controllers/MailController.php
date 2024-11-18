@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
-use App\Models\ReceivedEmail;
-use App\Models\SentEmail;
+use App\Models\Email;
+use App\Models\Recipient;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MailController extends Controller
 {
@@ -22,46 +24,88 @@ class MailController extends Controller
         $emailSubject = $request->input('subject');
         $emailContent = $request->input('text');
 
-        // Send the email
+        // Send the email using Mailgun
         Mail::to($recipientEmail)->send(new SendMail($recipientEmail, $emailSubject, $emailContent));
 
         // Save the sent email into the database
-        SentEmail::create([
-            'recipient' => $recipientEmail,
+        $email = Email::create([
+            'sender_id' => 1, // Assuming the sender is a user with ID 1
+            // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
+            'folder_id' => 1, // Assuming 1 is the ID for the 'sent' folder
             'subject' => $emailSubject,
             'body' => $emailContent,
+            'html' => null,
+            'is_starred' => false,
+            'is_important' => false,
         ]);
 
-        return back()->with('success', 'Email sent successfully!');
+        // Save the recipient into the database
+        $recipient = Recipient::create([
+            'email_id' => $email->id,
+            'receiver_email' => $recipientEmail,
+            'is_read' => false,
+        ]);
+
+        // Create an entry in the intermediary email_recipient table
+        DB::table('email_recipient')->insert([
+            'email_id' => $email->id,
+            'recipient_id' => $recipient->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json(['message' => 'Email sent successfully!']);
+    }
+
+    public function getEmails()
+    {
+        $emails = Email::with('recipients')->orderBy('created_at', 'desc')->get();
+        return response()->json($emails);
     }
 
     public function receiveEmail(Request $request)
     {
-        // Extract the relevant data from the request
-        $from = $request->input('sender');
-        $subject = $request->input('subject');
-        $body = $request->input('body-plain');
+        $data = $request->all();
 
-        // Store the received email in the database
-        ReceivedEmail::create([
-            'from' => $from,
+        // Extract relevant data from the request
+        $from = $data['sender'];
+        $subject = $data['subject'];
+        $body = $data['body-plain'];
+        $recipientEmail = $data['recipient'];
+
+        // Save the received email into the database
+        $email = Email::create([
+            'sender_id' => 1, // Assuming the sender is a user with ID 1
+            // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
+            'folder_id' => 1, // Assuming 1 is the ID for the 'received' folder
             'subject' => $subject,
             'body' => $body,
+            'html' => null,
+            'is_starred' => false,
+            'is_important' => false,
         ]);
 
-        // Respond with a JSON message
-        return response()->json(['message' => 'Email received']);
+        // Save the recipient into the database
+        $recipient = Recipient::create([
+            'email_id' => $email->id,
+            'receiver_email' => $recipientEmail,
+            'is_read' => false,
+        ]);
+
+        // Create an entry in the intermediary email_recipient table
+        DB::table('email_recipient')->insert([
+            'email_id' => $email->id,
+            'recipient_id' => $recipient->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json(['message' => 'Email received successfully!']);
     }
 
-    public function inbox()
+    public function fetchInbox()
     {
-        $emails = ReceivedEmail::orderBy('created_at', 'desc')->get();
-        return view('emails.inbox', compact('emails'));
-    }
-
-    public function sent()
-    {
-        $sentEmails = SentEmail::orderBy('created_at', 'desc')->get();
-        return view('emails.sent', compact('sentEmails'));
+        $emails = Email::where('folder_id', 1)->with('recipients')->orderBy('created_at', 'desc')->get();
+        return response()->json($emails);
     }
 }

@@ -28,7 +28,7 @@ class SendMail extends Mailable
     {
         return $this->view('emails.sendmail')
             ->with([
-                'recipientEmail' => $this->recipientEmail,
+                'emailSubject' => $this->emailSubject,
                 'emailContent' => $this->emailContent,
             ])
             ->subject($this->emailSubject);

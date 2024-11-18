@@ -7,8 +7,14 @@ use App\Models\Email;
 
 class Recipient extends Model
 {
-    public function emails()
+    protected $fillable = [
+        'email_id',
+        'receiver_email',
+        'is_read',
+    ];
+
+    public function email()
     {
-        return $this->hasMany(Email::class);
+        return $this->belongsTo(Email::class);
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('email_id');
+            $table->foreignId('email_id')->constrained('emails')->onDelete('cascade');
             $table->string('receiver_email');
             $table->boolean('is_read')->default(false);
             $table->timestamps();

@@ -1,4 +1,12 @@
-<!-- <p>Email: {{ $recipientEmail }}</p>
-<p>Message: {{ $emailContent }}</p> -->
+<!DOCTYPE html>
+<html>
 
-{{$emailContent}}
+<head>
+    <title>{{ $emailSubject }}</title>
+</head>
+
+<body>
+    <p>{{ $emailContent }}</p>
+</body>
+
+</html>
