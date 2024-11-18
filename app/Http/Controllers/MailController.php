@@ -24,6 +24,9 @@ class MailController extends Controller
         $emailSubject = $request->input('subject');
         $emailContent = $request->input('text');
 
+        // Extract plain text from HTML content
+        $plainTextContent = strip_tags($emailContent);
+
         // Send the email using Mailgun
         Mail::to($recipientEmail)->send(new SendMail($recipientEmail, $emailSubject, $emailContent));
 
@@ -31,10 +34,10 @@ class MailController extends Controller
         $email = Email::create([
             'sender_id' => 1, // Assuming the sender is a user with ID 1
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
-            'folder_id' => 1, // Assuming 1 is the ID for the 'sent' folder
+            'folder_id' => 2, // Set folder_id to 2 for sent emails
             'subject' => $emailSubject,
-            'body' => $emailContent,
-            'html' => null,
+            'body' => $plainTextContent,
+            'html' => $emailContent,
             'is_starred' => false,
             'is_important' => false,
         ]);
@@ -57,12 +60,6 @@ class MailController extends Controller
         return response()->json(['message' => 'Email sent successfully!']);
     }
 
-    public function getEmails()
-    {
-        $emails = Email::with('recipients')->orderBy('created_at', 'desc')->get();
-        return response()->json($emails);
-    }
-
     public function receiveEmail(Request $request)
     {
         $data = $request->all();
@@ -71,16 +68,17 @@ class MailController extends Controller
         $from = $data['sender'];
         $subject = $data['subject'];
         $body = $data['body-plain'];
+        $htmlBody = $data['body-html'] ?? null;
         $recipientEmail = $data['recipient'];
 
         // Save the received email into the database
         $email = Email::create([
             'sender_id' => 1, // Assuming the sender is a user with ID 1
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
-            'folder_id' => 1, // Assuming 1 is the ID for the 'received' folder
+            'folder_id' => 1, // Set folder_id to 1 for received emails
             'subject' => $subject,
             'body' => $body,
-            'html' => null,
+            'html' => $htmlBody,
             'is_starred' => false,
             'is_important' => false,
         ]);
@@ -106,6 +104,12 @@ class MailController extends Controller
     public function fetchInbox()
     {
         $emails = Email::where('folder_id', 1)->with('recipients')->orderBy('created_at', 'desc')->get();
+        return response()->json($emails);
+    }
+
+    public function getEmails()
+    {
+        $emails = Email::where('folder_id', 2)->with('recipients')->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
     }
 }

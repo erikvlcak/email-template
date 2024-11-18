@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
+import "../../css/style.scss";
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
     const [inbox, setInbox] = useState([]);
+    const [isEditorVisible, setIsEditorVisible] = useState(false);
 
     useEffect(() => {
         fetchEmails();
+        fetchInbox();
     }, []);
 
     const fetchEmails = async () => {
@@ -28,10 +31,19 @@ const Dashboard = () => {
         }
     };
 
+    const toggleEditor = () => {
+        setIsEditorVisible(!isEditorVisible);
+    };
+
     return (
         <div>
             <h1>Dashboard</h1>
-            <Editor onEmailSent={fetchEmails} />
+            {isEditorVisible && (
+                <Editor onEmailSent={fetchEmails} onClose={toggleEditor} />
+            )}
+            <button className="compose-button" onClick={toggleEditor}>
+                +
+            </button>
             <h2>Sent Emails</h2>
             <ul>
                 {emails.map((email) => (
@@ -43,6 +55,9 @@ const Dashboard = () => {
                         <br />
                         <strong>Subject:</strong> {email.subject} <br />
                         <strong>Body:</strong> {email.body} <br />
+                        <strong>Formatted Body:</strong>{" "}
+                        <div dangerouslySetInnerHTML={{ __html: email.html }} />{" "}
+                        <br />
                         <strong>Star:</strong> {email.is_starred ? "Yes" : "No"}{" "}
                         <br />
                     </li>
@@ -56,6 +71,9 @@ const Dashboard = () => {
                         <strong>From:</strong> {email.sender_email} <br />
                         <strong>Subject:</strong> {email.subject} <br />
                         <strong>Body:</strong> {email.body} <br />
+                        <strong>Formatted Body:</strong>{" "}
+                        <div dangerouslySetInnerHTML={{ __html: email.html }} />{" "}
+                        <br />
                     </li>
                 ))}
             </ul>

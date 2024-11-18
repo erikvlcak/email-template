@@ -4,7 +4,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import "../../css/style.scss";
 
-const Editor = ({ onEmailSent }) => {
+const Editor = ({ onEmailSent, onClose }) => {
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [content, setContent] = useState("");
@@ -20,15 +20,19 @@ const Editor = ({ onEmailSent }) => {
             });
             setStatus("Email sent successfully!");
             onEmailSent(); // Refresh the email list in Dashboard
+            onClose(); // Close the editor window
         } catch (error) {
             setStatus("Failed to send email.");
         }
     };
 
     return (
-        <div>
+        <div className="editor-window">
+            <button className="close-button" onClick={onClose}>
+                X
+            </button>
             <h2>Compose Message</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="editor-content">
                 <div>
                     <label>Email:</label>
                     <input
@@ -47,7 +51,7 @@ const Editor = ({ onEmailSent }) => {
                         required
                     />
                 </div>
-                <div>
+                <div className="editor-content">
                     <label>Body:</label>
                     <CKEditor
                         editor={ClassicEditor}
