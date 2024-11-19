@@ -1,10 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
+* {
+    outline: 1px solid red;
+}
+
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.email-filters {
+    flex: 1;
 }
 
 .dashboard {
@@ -45,10 +53,14 @@ body {
 
 .fixed-top {
     position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     top: 0;
-    left: 220px; /* Adjust this value based on the width of the sidebar */
+    left: 240px;
     right: 0;
-    background-color: white;
+    background-color: #f1f1f1;
     z-index: 1000;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

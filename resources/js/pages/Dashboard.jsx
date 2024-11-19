@@ -4,6 +4,7 @@ import Editor from "../components/Editor";
 import "../../css/style.scss";
 import Search from "../components/Search";
 import DashboardNavigation from "../components/DashboardNavigation";
+import Profile from "../components/Profile";
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
@@ -54,8 +55,13 @@ const Dashboard = () => {
             </div>
             <div className="main-content">
                 <div className="fixed-top">
-                    <Search />
-                    <DashboardNavigation />
+                    <div className="email-filters">
+                        <Search />
+                        <DashboardNavigation />
+                    </div>
+                    <div className="profile">
+                        <Profile />
+                    </div>
                 </div>
                 {isEditorVisible && (
                     <Editor onEmailSent={fetchEmails} onClose={toggleEditor} />
