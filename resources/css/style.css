@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.main-container {
+  font-family: "Lato";
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.editor__input {
+  border: 0px;
+  border-bottom: 1px solid gray;
+  width: 100%;
+  padding: 1rem 0 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.editor__input:focus {
+  outline: 0px;
+}
+
+.ck-content {
+  font-family: "Lato";
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.ck-content > p:nth-child(1) {
+  min-height: 200px;
+}
+
+.editor-container_classic-editor .editor-container__editor {
+  min-width: 795px;
+  max-width: 795px;
+}
+
+.compose-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.editor-window {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 50vw;
+  height: 80vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.editor-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-content .ck-editor__editable_inline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ck-editor__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ck-editor__editable {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
