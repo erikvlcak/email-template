@@ -68,6 +68,7 @@ const Dashboard = () => {
                     <Search />
                     <DashboardNavigation />
                 </div>
+                <div></div>
                 {isEditorVisible && (
                     <Editor
                         onEmailSent={() => fetchEmails(selectedFolder)}
