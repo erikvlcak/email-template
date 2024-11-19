@@ -1,0 +1,60 @@
+.development{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2rem;
+    min-width: 20rem;
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    .profile-details{
+        margin-bottom: 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .profile-pfp{
+           border-radius: 50%;
+           background-color: lightgreen;
+           height: 7rem;
+           width: 7rem;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           font-size: 3rem;
+
+           .pfp-letter{
+            color: coral;
+           }
+           
+        }
+    }
+
+    .profile-functionality{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+
+        button{
+            height: 3rem;
+            width: 80%;
+            border: 1px solid lightcoral;
+            border-radius: 10px;
+            background-color: white;
+            margin: 1rem 1rem 1rem 1rem;
+
+            &:hover{
+                background-color: lightcoral;
+                color: white;
+            }
+        }
+    }
+
+}

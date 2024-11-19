@@ -48,7 +48,7 @@ export default function Register(props) {
             // make the AJAX request
             const response = await axios.post("/register", values);
             // get the (already JSON-parsed) response data
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 // Redirect to the main page after successful registration
                 navigate("/");
             }

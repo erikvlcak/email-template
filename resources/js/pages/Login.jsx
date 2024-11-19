@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import key from '../keys';
+import Profile from '../components/Profile';
+
+import UserContext from '../context/UserContext';
  
 export default function Login(props) {
     
-    const[backgroundImg, setBackgroundImg] = useState(null);
+    const { getUser } = useContext(UserContext);
     const navigate = useNavigate();
+    
+    const[backgroundImg, setBackgroundImg] = useState(null);
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -41,6 +46,7 @@ export default function Login(props) {
             // get the (already JSON-parsed) response data
             if (response.status === 200) {
                 // Redirect to the main page after successful registration
+                getUser();
                 navigate('/');
             }
         } catch (error) {
@@ -90,7 +96,10 @@ export default function Login(props) {
             </div>
 
             </div>
-
+            <div className="development">
+            <Profile />
+            </div>
+        
         </div>
     );
 }
