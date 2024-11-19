@@ -21,7 +21,7 @@ class RecipientsTableSeeder extends Seeder
         $emailIds = Email::pluck('id')->toArray();
         $userEmails = User::pluck('email')->toArray();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             DB::table('recipients')->insert([
                 'email_id' => $faker->randomElement($emailIds),
                 'receiver_email' => $faker->randomElement($userEmails),

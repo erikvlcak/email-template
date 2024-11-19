@@ -11,16 +11,6 @@ body {
     box-sizing: border-box;
 }
 
-.navigation {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.email-filters {
-    flex: 1;
-}
-
 .dashboard {
     display: flex;
 }
@@ -32,12 +22,37 @@ body {
     width: 200px;
     height: 100%;
     background-color: #f1f1f1;
-    padding: 20px;
+    padding: 1rem 1rem 1rem 0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h2 {
     margin-top: 0;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.navigation button {
+    background: none;
+    border: none;
+    padding: 10px 0;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 1rem;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.navigation button.active {
+    font-weight: bold;
+}
+
+.navigation button:hover {
+    background-color: #ddd;
 }
 
 .sidebar ul {
@@ -59,14 +74,10 @@ body {
 
 .fixed-top {
     position: fixed;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     top: 0;
-    left: 240px;
+    left: 220px; /* Adjust this value based on the width of the sidebar */
     right: 0;
-    background-color: #f1f1f1;
+    background-color: white;
     z-index: 1000;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -78,6 +89,38 @@ body {
     height: calc(
         100vh - 140px
     ); /* Adjust this value based on the height of the fixed top elements */
+}
+
+.email-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 1rem;
+    width: 80vw;
+}
+
+.email-subjectAndBody {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // margin-left: auto;
+}
+
+.email-subject {
+    font-weight: bold;
+}
+
+.email-body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1;
+    color: #000000cb;
 }
 
 .compose-button {

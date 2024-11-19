@@ -39,7 +39,7 @@ class MailController extends Controller
             'body' => $plainTextContent,
             'html' => $emailContent,
             'is_starred' => false,
-            'is_important' => false,
+            // 'is_important' => false,
         ]);
 
         // Save the recipient into the database
@@ -80,7 +80,7 @@ class MailController extends Controller
             'body' => $body,
             'html' => $htmlBody,
             'is_starred' => false,
-            'is_important' => false,
+            // 'is_important' => false,
         ]);
 
         // Save the recipient into the database
@@ -101,15 +101,21 @@ class MailController extends Controller
         return response()->json(['message' => 'Email received successfully!']);
     }
 
-    public function fetchInbox()
+    public function getEmails(Request $request)
     {
-        $emails = Email::where('folder_id', 1)->with('recipients')->orderBy('created_at', 'desc')->get();
+        $query = Email::query();
+
+        if ($request->has('folder_id')) {
+            $query->where('folder_id', $request->input('folder_id'));
+        }
+
+        $emails = $query->with('recipients')->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
     }
 
-    public function getEmails()
+    public function fetchInbox()
     {
-        $emails = Email::where('folder_id', 2)->with('recipients')->orderBy('created_at', 'desc')->get();
+        $emails = Email::where('folder_id', 1)->with('recipients')->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
     }
 }

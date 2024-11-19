@@ -21,7 +21,7 @@ class EmailsTableSeeder extends Seeder
         $userIds = User::pluck('id')->toArray();
         $folderIds = Folder::pluck('id')->toArray();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             DB::table('emails')->insert([
                 'sender_id' => $faker->randomElement($userIds),
                 'folder_id' => $faker->randomElement($folderIds),
@@ -29,7 +29,6 @@ class EmailsTableSeeder extends Seeder
                 'body' => $faker->paragraphs(3, true),
                 'html' => null,
                 'is_starred' => $faker->boolean,
-                'is_important' => $faker->boolean,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -1,41 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
-
+import EmailList from "../components/EmailList";
 import "../../css/style.scss";
 import Search from "../components/Search";
 import DashboardNavigation from "../components/DashboardNavigation";
-import Profile from "../components/Profile";
 import { Link } from "react-router-dom";
-
-import Logout from "../components/Logout";
-
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
-    const [inbox, setInbox] = useState([]);
     const [isEditorVisible, setIsEditorVisible] = useState(false);
+    const [selectedFolder, setSelectedFolder] = useState(1); // Default to Inbox
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchEmails();
-        fetchInbox();
-    }, []);
+        fetchEmails(selectedFolder);
+    }, [selectedFolder]);
 
-    const fetchEmails = async () => {
+    const fetchEmails = async (folderId) => {
         try {
-            const response = await axios.get("/api/emails");
+            let response;
+            setLoading(true);
+            response = await axios.get(`/api/emails?folder_id=${folderId}`);
+
             setEmails(response.data);
+            setLoading(false);
         } catch (error) {
             console.error("Error fetching emails:", error);
-        }
-    };
-
-    const fetchInbox = async () => {
-        try {
-            const response = await axios.get("/api/fetch-inbox");
-            setInbox(response.data);
-        } catch (error) {
-            console.error("Error fetching inbox:", error);
         }
     };
 
@@ -43,86 +34,83 @@ const Dashboard = () => {
         setIsEditorVisible(!isEditorVisible);
     };
 
-    return (
+    const handleFolderClick = (folderId) => {
+        setSelectedFolder(folderId);
+    };
 
+    const formatDate = (dateString) => {
+        const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+        return new Date(dateString).toLocaleDateString("en-GB", options);
+    };
+
+    return (
         <div className="dashboard">
             <div className="sidebar">
                 <h2>CBP Mail</h2>
+                <button
+                    className="refresh-button"
+                    onClick={() => fetchEmails(selectedFolder)}
+                >
+                    Refresh
+                </button>
                 <ul className="navigation">
-                    <Link to="/inbox">
-                        Inbox{" "}
-                        <button onClick={fetchInbox}>Refresh Inbox</button>{" "}
-                    </Link>
-                    <Link to="/starred">Starred</Link>
-                    <Link to="/sent">Sent</Link>
-                    <Link to="/drafts">Drafts</Link>
-                    <Link to="/trash">Trash</Link>
+                    <button onClick={() => handleFolderClick(1)}>Inbox</button>
+                    <button onClick={() => handleFolderClick(2)}>Sent</button>
+                    <button onClick={() => handleFolderClick(3)}>
+                        Starred
+                    </button>
+                    <button onClick={() => handleFolderClick(4)}>Drafts</button>
+                    <button onClick={() => handleFolderClick(5)}>Trash</button>
                 </ul>
             </div>
             <div className="main-content">
                 <div className="fixed-top">
-                    <div className="email-filters">
-                        <Search />
-                        <DashboardNavigation />
-                    </div>
-                    <div className="profile">
-                        <Profile />
-                    </div>
+                    <Search />
+                    <DashboardNavigation />
                 </div>
                 {isEditorVisible && (
-                    <Editor onEmailSent={fetchEmails} onClose={toggleEditor} />
+                    <Editor
+                        onEmailSent={() => fetchEmails(selectedFolder)}
+                        onClose={toggleEditor}
+                    />
                 )}
                 <button className="compose-button" onClick={toggleEditor}>
                     +
                 </button>
                 <div className="email-list">
-                    <h2>Sent Emails</h2>
-                    <ul>
-                        {emails.map((email) => (
-                            <li key={email.id}>
-                                <strong>To:</strong>{" "}
-                                {email.recipients
-                                    .map(
-                                        (recipient) => recipient.receiver_email
-                                    )
-                                    .join(", ")}{" "}
-                                <br />
-                                <strong>Subject:</strong> {email.subject} <br />
-                                <strong>Body:</strong> {email.body} <br />
-                                <strong>Formatted Body:</strong>{" "}
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: email.html,
-                                    }}
-                                />{" "}
-                                <br />
-                                <strong>Star:</strong>{" "}
-                                {email.is_starred ? "Yes" : "No"} <br />
-                            </li>
-                        ))}
-                    </ul>
-                    <button onClick={fetchInbox}>Refresh Inbox</button>
-                    <h2>Inbox</h2>
-                    <ul>
-                        {inbox.map((email) => (
-                            <li key={email.id}>
-                                <strong>From:</strong> {email.sender_email}{" "}
-                                <br />
-                                <strong>Subject:</strong> {email.subject} <br />
-                                <strong>Body:</strong> {email.body} <br />
-                                <strong>Formatted Body:</strong>{" "}
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: email.html,
-                                    }}
-                                />{" "}
-                                <br />
-                            </li>
-                        ))}
-                    </ul>
+                    <EmailList>
+                        {loading ? (
+                            <div>Loading emails...</div>
+                        ) : (
+                            emails.map((email) => (
+                                <li key={email.id} className="email-item">
+                                    {selectedFolder !== 1 && (
+                                        <div className="email-recipient">
+                                            {email.recipients
+                                                .map(
+                                                    (recipient) =>
+                                                        recipient.receiver_email ||
+                                                        "Unknown Recipient"
+                                                )
+                                                .join(", ")}
+                                        </div>
+                                    )}
+                                    <div className="email-subjectAndBody">
+                                        <span className="email-subject">
+                                            {email.subject}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span className="email-body">
+                                            {email.body}
+                                        </span>
+                                    </div>
+                                    <div>{formatDate(email.created_at)}</div>
+                                </li>
+                            ))
+                        )}
+                    </EmailList>
                 </div>
             </div>
-
         </div>
     );
 };
