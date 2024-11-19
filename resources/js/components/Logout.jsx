@@ -7,7 +7,7 @@ export default function Logout () {
     const handleLogout = async () => {
         try {
             const response = axios.post('/logout');
-            if (response.status === 200 || 401) {
+            if (response.status === 204 || response.status === 401) {
                 // Redirect to the main page after successful registration
                 navigate('/login'); 
             }

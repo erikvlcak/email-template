@@ -8,9 +8,30 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./components/Logout";
 
+import UserContext from "./context/UserContext";
+
 function App() {
+
+    const [user, setUser] = useState(null);
+
+    const getUser = async () => {
+        try {
+            const response = await axios('/api/user');
+
+            console.log(response.data);
+            
+            setUser(response.data);
+        } catch (error) {
+            setUser(false);
+        }
+    }
+
+    useEffect(() => {
+        getUser();
+    }, [])
+
     return (
-        <div>
+        <UserContext.Provider value={{ user, setUser, getUser }}>
             <BrowserRouter >
                 <Routes>
                     <Route path="/" element={<Dashboard />} />
@@ -18,7 +39,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                 </Routes>
             </BrowserRouter>
-        </div>
+        </UserContext.Provider>
     );
 }
 
