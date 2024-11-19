@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
+
 import "../../css/style.scss";
 import Search from "../components/Search";
 import DashboardNavigation from "../components/DashboardNavigation";
 import Profile from "../components/Profile";
 import { Link } from "react-router-dom";
+
+import Logout from "../components/Logout";
+
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
@@ -40,6 +44,7 @@ const Dashboard = () => {
     };
 
     return (
+
         <div className="dashboard">
             <div className="sidebar">
                 <h2>CBP Mail</h2>
@@ -117,6 +122,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
             </div>
+
         </div>
     );
 };
