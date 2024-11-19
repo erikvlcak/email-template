@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
+import Logout from "../components/Logout";
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
@@ -31,6 +32,7 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Dashboard</h1>
+            <Logout/>
             <Editor onEmailSent={fetchEmails} />
             <h2>Sent Emails</h2>
             <ul>

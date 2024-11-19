@@ -6,13 +6,12 @@ import axios from "axios";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Logout from "./components/Logout";
 
 function App() {
     return(
         <div>
-            Some stuff on the page!
             <BrowserRouter >
-                <Link to="/register">Register</Link>
                 <Routes>
                     <Route path="/" element={<Dashboard />}/>
                     <Route path="/login" element={<Login />}/>
