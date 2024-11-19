@@ -1,0 +1,113 @@
+body{
+    margin: 0;
+}
+.register-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2rem;
+    min-width: 30rem;
+    padding: 2rem;
+
+    .login-link {
+        text-align: center;
+    }
+}
+
+.register-body{
+    align-items: center;
+    display: flex;
+    height: 92vh;
+    background-color: blue;
+    margin: 0;
+    padding: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+
+    input{
+        height: 3rem;
+        width: 80%;
+        border: 1px solid lightcoral;
+        border-radius: 10px;
+        placeholder{
+            color: #04AA6D;
+        }
+    }
+
+    button{
+        background-color: #04AA6D; 
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+
+}
+
+.login-wrapper{
+    background-color: white;
+    height: 90%;
+    width: 35%;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+
+    input{
+        height: 3rem;
+        width: 80%;
+        border: 1px solid lightcoral;
+        border-radius: 10px;
+        placeholder{
+            color: #04AA6D;
+        }
+    }
+
+    button{
+        background-color: #04AA6D; 
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+
+}
+
+.login-body{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background-color: blue;
+    margin: 0;
+    image{
+        height: 100vh;
+        width: 100vw;
+    }
+}
