@@ -5,6 +5,7 @@ import "../../css/style.scss";
 import Search from "../components/Search";
 import DashboardNavigation from "../components/DashboardNavigation";
 import Profile from "../components/Profile";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
@@ -42,15 +43,15 @@ const Dashboard = () => {
         <div className="dashboard">
             <div className="sidebar">
                 <h2>CBP Mail</h2>
-                <ul>
-                    <li>
+                <ul className="navigation">
+                    <Link to="/inbox">
                         Inbox{" "}
                         <button onClick={fetchInbox}>Refresh Inbox</button>{" "}
-                    </li>
-                    <li>Starred</li>
-                    <li>Sent</li>
-                    <li>Drafts</li>
-                    <li>Trash</li>
+                    </Link>
+                    <Link to="/starred">Starred</Link>
+                    <Link to="/sent">Sent</Link>
+                    <Link to="/drafts">Drafts</Link>
+                    <Link to="/trash">Trash</Link>
                 </ul>
             </div>
             <div className="main-content">
