@@ -31,7 +31,8 @@ class SendMail extends Mailable
                 'emailSubject' => $this->emailSubject,
                 'emailContent' => $this->emailContent,
             ])
-            ->subject($this->emailSubject);
+            ->subject($this->emailSubject)
+            ->html($this->emailContent); // Ensure the content is sent as HTML
     }
 
     /**
