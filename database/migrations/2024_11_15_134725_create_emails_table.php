@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('folder_id')->constrained('folders')->onDelete('cascade');
+            $table->foreignId('sender_id');
+            $table->foreignId('folder_id');
             $table->string('subject')->nullable();
             $table->text('body')->nullable();
             $table->text('html')->nullable();
             $table->boolean('is_starred')->default(false);
-            $table->boolean('is_important')->default(false);
             $table->timestamps();
         });
     }

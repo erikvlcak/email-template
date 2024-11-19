@@ -15,10 +15,9 @@ class FoldersTableSeeder extends Seeder
         $folders = [
             ['name' => 'received', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'sent', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'all', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'starred', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'drafts', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'deleted', 'created_at' => now(), 'updated_at' => now()],
-            // ['name' => 'starred', 'created_at' => now(), 'updated_at' => now()],
             // ['name' => 'important', 'created_at' => now(), 'updated_at' => now()],
         ];
 
