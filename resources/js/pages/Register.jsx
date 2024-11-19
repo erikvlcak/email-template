@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+
 
 import key from '../keys';
 
@@ -46,7 +46,7 @@ export default function Register(props) {
             // make the AJAX request
             const response = await axios.post('/register', values);
             // get the (already JSON-parsed) response data
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 // Redirect to the main page after successful registration
                 navigate('/');
             }
