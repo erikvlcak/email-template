@@ -8,19 +8,18 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 function App() {
-    return(
+    return (
         <div>
-            Some stuff on the page!
-            <BrowserRouter >
+            <BrowserRouter>
                 <Link to="/register">Register</Link>
                 <Routes>
-                    <Route path="/" element={<Dashboard />}/>
-                    <Route path="/login" element={<Login />}/>
-                    <Route path="/register" element={<Register />}/>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
             </BrowserRouter>
         </div>
-    )
+    );
 }
 
 export default App;

@@ -31,32 +31,22 @@ const Editor = ({ onEmailSent, onClose }) => {
             <button className="close-button" onClick={onClose}>
                 X
             </button>
-            {subject ? <h2>{subject}</h2> : <h2>New message</h2>}
             <form onSubmit={handleSubmit} className="editor-content">
-                <div>
-                    {/* <label>Send to:</label> */}
-                    <input
-                        type="email"
-                        className="editor__input"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        placeholder="Recipient"
-                    />
-                </div>
-                <div>
-                    {/* <label>Subject:</label> */}
-                    <input
-                        type="text"
-                        className="editor__input"
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        required
-                        placeholder="Subject"
-                    />
-                </div>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Recipient"
+                />
+                <input
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    required
+                    placeholder="Subject"
+                />
                 <div className="editor-content">
-                    {/* <label>Message:</label> */}
                     <CKEditor
                         editor={ClassicEditor}
                         data={content}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
 import "../../css/style.scss";
+import Search from "../components/Search";
+import DashboardNavigation from "../components/DashboardNavigation";
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
@@ -36,47 +38,78 @@ const Dashboard = () => {
     };
 
     return (
-        <div>
-            <h1>Dashboard</h1>
-            {isEditorVisible && (
-                <Editor onEmailSent={fetchEmails} onClose={toggleEditor} />
-            )}
-            <button className="compose-button" onClick={toggleEditor}>
-                +
-            </button>
-            <h2>Sent Emails</h2>
-            <ul>
-                {emails.map((email) => (
-                    <li key={email.id}>
-                        <strong>To:</strong>{" "}
-                        {email.recipients
-                            .map((recipient) => recipient.receiver_email)
-                            .join(", ")}{" "}
-                        <br />
-                        <strong>Subject:</strong> {email.subject} <br />
-                        <strong>Body:</strong> {email.body} <br />
-                        <strong>Formatted Body:</strong>{" "}
-                        <div dangerouslySetInnerHTML={{ __html: email.html }} />{" "}
-                        <br />
-                        <strong>Star:</strong> {email.is_starred ? "Yes" : "No"}{" "}
-                        <br />
+        <div className="dashboard">
+            <div className="sidebar">
+                <h2>CBP Mail</h2>
+                <ul>
+                    <li>
+                        Inbox{" "}
+                        <button onClick={fetchInbox}>Refresh Inbox</button>{" "}
                     </li>
-                ))}
-            </ul>
-            <button onClick={fetchInbox}>Refresh Inbox</button>
-            <h2>Inbox</h2>
-            <ul>
-                {inbox.map((email) => (
-                    <li key={email.id}>
-                        <strong>From:</strong> {email.sender_email} <br />
-                        <strong>Subject:</strong> {email.subject} <br />
-                        <strong>Body:</strong> {email.body} <br />
-                        <strong>Formatted Body:</strong>{" "}
-                        <div dangerouslySetInnerHTML={{ __html: email.html }} />{" "}
-                        <br />
-                    </li>
-                ))}
-            </ul>
+                    <li>Starred</li>
+                    <li>Sent</li>
+                    <li>Drafts</li>
+                    <li>Trash</li>
+                </ul>
+            </div>
+            <div className="main-content">
+                <div className="fixed-top">
+                    <Search />
+                    <DashboardNavigation />
+                </div>
+                {isEditorVisible && (
+                    <Editor onEmailSent={fetchEmails} onClose={toggleEditor} />
+                )}
+                <button className="compose-button" onClick={toggleEditor}>
+                    +
+                </button>
+                <div className="email-list">
+                    <h2>Sent Emails</h2>
+                    <ul>
+                        {emails.map((email) => (
+                            <li key={email.id}>
+                                <strong>To:</strong>{" "}
+                                {email.recipients
+                                    .map(
+                                        (recipient) => recipient.receiver_email
+                                    )
+                                    .join(", ")}{" "}
+                                <br />
+                                <strong>Subject:</strong> {email.subject} <br />
+                                <strong>Body:</strong> {email.body} <br />
+                                <strong>Formatted Body:</strong>{" "}
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: email.html,
+                                    }}
+                                />{" "}
+                                <br />
+                                <strong>Star:</strong>{" "}
+                                {email.is_starred ? "Yes" : "No"} <br />
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={fetchInbox}>Refresh Inbox</button>
+                    <h2>Inbox</h2>
+                    <ul>
+                        {inbox.map((email) => (
+                            <li key={email.id}>
+                                <strong>From:</strong> {email.sender_email}{" "}
+                                <br />
+                                <strong>Subject:</strong> {email.subject} <br />
+                                <strong>Body:</strong> {email.body} <br />
+                                <strong>Formatted Body:</strong>{" "}
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: email.html,
+                                    }}
+                                />{" "}
+                                <br />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 };
