@@ -1,48 +1,46 @@
-.development{
+.development {
     align-items: center;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
+    background-color: #f1f1f1;
     border-radius: 2rem;
     min-width: 20rem;
     padding: 2rem;
     position: absolute;
-    top: 0;
-    right: 0;
-    
-    .profile-details{
-        margin-bottom: 10rem;
+    box-shadow: 1px 1px 5px;
+    top: 1rem;
+    right: 1rem;
+    .profile-details {
+        // margin-bottom: 10rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        .profile-pfp{
-           border-radius: 50%;
-           background-color: lightgreen;
-           height: 7rem;
-           width: 7rem;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           font-size: 3rem;
+        .profile-pfp {
+            border-radius: 50%;
+            background-color: lightgreen;
+            height: 7rem;
+            width: 7rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
 
-           .pfp-letter{
-            color: coral;
-           }
-           
+            .pfp-letter {
+                color: coral;
+            }
         }
     }
 
-    .profile-functionality{
+    .profile-functionality {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
 
-        button{
+        button {
             height: 3rem;
             width: 80%;
             border: 1px solid lightcoral;
@@ -50,11 +48,10 @@
             background-color: white;
             margin: 1rem 1rem 1rem 1rem;
 
-            &:hover{
+            &:hover {
                 background-color: lightcoral;
                 color: white;
             }
         }
     }
-
 }
