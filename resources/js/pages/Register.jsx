@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 import key from '../keys';
 
@@ -8,7 +9,8 @@ import Logout from '../components/Logout';
 import Login from './Login';
  
 export default function Register(props) {
-    const[backgroundImg, setBackgroundImg] = useState(null)
+    const[backgroundImg, setBackgroundImg] = useState(null);
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
         firstname: '',
@@ -32,7 +34,7 @@ export default function Register(props) {
     }
 
     useEffect(()=>{
-        loadImage()
+         //loadImage();
     },[])
  
     const handleSubmit = async (event) => {
@@ -44,7 +46,10 @@ export default function Register(props) {
             // make the AJAX request
             const response = await axios.post('/register', values);
             // get the (already JSON-parsed) response data
-            const response_data = response.data;
+            if (response.status === 200) {
+                // Redirect to the main page after successful registration
+                navigate('/');
+            }
         } catch (error) {
             // if the response code is not 2xx (success)
             switch (error.response.status) {
@@ -68,9 +73,15 @@ export default function Register(props) {
     }
  
     return (
-    <div className="register-body" style={{backgroundImage: `url(${backgroundImg?.urls.regular+ "&fit"})`}}>
-       <div className="register-wrapper">
-            <form className="register-form" action="/register" method="post" onSubmit={ handleSubmit }>
+    <div className="auth-body" style={{backgroundImage: `url(${backgroundImg?.urls.regular+ "&fit"})`}}>
+       <div className="auth-wrapper">
+
+        <div className="auth-header">
+            <h1 className="auth-header-text">Sign Up</h1>
+            <p className="auth-detail-text">Please enter your details</p>
+        </div>
+       
+            <form className="auth-form" action="/register" method="post" onSubmit={ handleSubmit }>
                 {/* <label htmlFor="firstname">First Name: </label> */}
     
                 <input type="text" name="firstname" placeholder="First name" value={ values.firstname } onChange={ handleChange } />
@@ -98,7 +109,12 @@ export default function Register(props) {
                 <button>Register</button>
     
             </form>
-            <Link className="login-link" to="/login">Login</Link>
+
+            <div className="auth-link">
+                <p>Already Have an Account?</p>
+                <p><Link className="auth-link-button" to="/login">Log In</Link></p>
+            </div>
+
        </div>
     </div>
     );

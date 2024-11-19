@@ -1,7 +1,7 @@
 body{
     margin: 0;
 }
-.register-wrapper {
+.auth-wrapper {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -11,12 +11,39 @@ body{
     min-width: 30rem;
     padding: 2rem;
 
-    .login-link {
+
+    .auth-header{
+        display: flex;
+        flex-direction: column;
+
+        .auth-header-text{
+            text-align: center;
+        }
+
+        .auth-detail-text{
+            text-align: center;
+        }
+    }
+
+    .auth-link{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 50%; 
+    }
+
+    .auth-link-button{
+        text-decoration: none;
+        color: #04AA6D;
+    }
+
+    ::placeholder{
+        font-size: 1rem;
         text-align: center;
     }
 }
 
-.register-body{
+.auth-body{
     align-items: center;
     display: flex;
     height: 92vh;
@@ -28,12 +55,12 @@ body{
     background-size: cover;
 }
 
-.register-form{
+.auth-form{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     width: 100%;
 
     input{
@@ -56,58 +83,10 @@ body{
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        
     }
 
 
-}
-
-.login-wrapper{
-    background-color: white;
-    height: 90%;
-    width: 35%;
-}
-
-.login-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-
-    input{
-        height: 3rem;
-        width: 80%;
-        border: 1px solid lightcoral;
-        border-radius: 10px;
-        placeholder{
-            color: #04AA6D;
-        }
-    }
-
-    button{
-        background-color: #04AA6D; 
-        border: none;
-        border-radius: 10px;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
-
-
-}
-
-.login-body{
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    background-color: blue;
-    margin: 0;
-    image{
-        height: 100vh;
-        width: 100vw;
-    }
 }

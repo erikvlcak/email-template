@@ -1,34 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import key from '../keys';
  
 export default function Login(props) {
- 
+    
+    const[backgroundImg, setBackgroundImg] = useState(null);
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
         password: ''
     })
+
+    const loadImage = async () => {
+        try {
+            const response = await axios.get(`https://api.unsplash.com/photos/random?client_id=${key}`)
+            const data = response.data;
+            setBackgroundImg(data)
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+
+        // setTimeout(loadImage, 30000);
+    }
+
+    useEffect(()=>{
+        // loadImage();
+    },[])
  
     const handleSubmit = async (event) => {
  
         event.preventDefault();
- 
-        // make the AJAX request
-        const response = await fetch('/login', {
-            method: 'POST',
-            body: JSON.stringify(values),
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        });
  
         // with axios
         try {
             // make the AJAX request
             const response = await axios.post('/login', values);
             // get the (already JSON-parsed) response data
-            const response_data = response.data;
+            if (response.status === 200) {
+                // Redirect to the main page after successful registration
+                navigate('/');
+            }
         } catch (error) {
             // if the response code is not 2xx (success)
             switch (error.response.status) {
@@ -52,11 +66,16 @@ export default function Login(props) {
     }
  
     return (
-        <div className="login-body">
+        <div className="auth-body" style={{backgroundImage: `url(${backgroundImg?.urls.regular+ "&fit"})`}}>
 
-            <div className="login-wrapper">
+            <div className="auth-wrapper">
+
+            <div className="auth-header">
+            <h1 className="auth-header-text">Welcome back</h1>
+            <p className="auth-detail-text">Please enter your details</p>
+        </div>
                 
-                <form className="login-form" action="/login" method="post" onSubmit={ handleSubmit }>
+                <form className="auth-form" action="/login" method="post" onSubmit={ handleSubmit }>
          
                     <input type="email" name="email" placeholder="Email" value={ values.email } onChange={ handleChange } />
          
@@ -65,7 +84,10 @@ export default function Login(props) {
                     <button>Login</button>
          
                 </form>
-            <Link to="/register">Register</Link>
+            <div className="auth-link">
+                <p>Dont Have an Account?</p>
+                <p><Link className="auth-link-button" to="/register">Sign up</Link></p>
+            </div>
 
             </div>
 
