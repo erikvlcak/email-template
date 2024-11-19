@@ -38,6 +38,11 @@ const Dashboard = () => {
         setSelectedFolder(folderId);
     };
 
+    const formatDate = (dateString) => {
+        const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+        return new Date(dateString).toLocaleDateString("en-GB", options);
+    };
+
     return (
         <div className="dashboard">
             <div className="sidebar">
@@ -94,8 +99,12 @@ const Dashboard = () => {
                                         <span className="email-subject">
                                             {email.subject}
                                         </span>{" "}
-                                        - {email.body}
+                                        -{" "}
+                                        <span className="email-body">
+                                            {email.body}
+                                        </span>
                                     </div>
+                                    <div>{formatDate(email.created_at)}</div>
                                 </li>
                             ))
                         )}

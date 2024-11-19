@@ -93,6 +93,7 @@ body {
 
 .email-item {
     display: flex;
+    justify-content: start;
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
@@ -100,14 +101,18 @@ body {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
     gap: 1rem;
+    width: 80vw;
 }
 
-.email-recipient,
-.email-subject {
+.email-subjectAndBody {
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: bold;
     white-space: nowrap;
+    // margin-left: auto;
+}
+
+.email-subject {
+    font-weight: bold;
 }
 
 .email-body {
@@ -115,6 +120,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     flex: 1;
+    color: #000000cb;
 }
 
 .compose-button {

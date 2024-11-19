@@ -39,7 +39,7 @@ class MailController extends Controller
             'body' => $plainTextContent,
             'html' => $emailContent,
             'is_starred' => false,
-            'is_important' => false,
+            // 'is_important' => false,
         ]);
 
         // Save the recipient into the database
@@ -80,7 +80,7 @@ class MailController extends Controller
             'body' => $body,
             'html' => $htmlBody,
             'is_starred' => false,
-            'is_important' => false,
+            // 'is_important' => false,
         ]);
 
         // Save the recipient into the database
