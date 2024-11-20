@@ -13,6 +13,7 @@ const Dashboard = () => {
     const [isEditorVisible, setIsEditorVisible] = useState(false);
     const [selectedFolder, setSelectedFolder] = useState(1); // Default to Inbox
     const [loading, setLoading] = useState(false);
+    const [selectedEmails, setSelectedEmails] = useState([]);
 
     useEffect(() => {
         fetchEmails(selectedFolder);
@@ -44,6 +45,7 @@ const Dashboard = () => {
     const handleFolderClick = (folderId) => {
         setSelectedFolder(folderId);
         setSelectedEmail(null); // Reset selected email when changing folders
+        setSelectedEmails([]); // Reset selected emails when changing folders
     };
 
     const handleEmailClick = (email) => {
@@ -54,6 +56,26 @@ const Dashboard = () => {
         const options = { day: "2-digit", month: "2-digit", year: "numeric" };
         return new Date(dateString).toLocaleDateString("en-GB", options);
     };
+
+    const handleSelectEmail = (emailId) => {
+        setSelectedEmails((prevSelectedEmails) =>
+            prevSelectedEmails.includes(emailId)
+                ? prevSelectedEmails.filter((id) => id !== emailId)
+                : [...prevSelectedEmails, emailId]
+        );
+    };
+
+    const handleSelectAllEmails = (displayedEmails) => {
+        if (selectedEmails.length === displayedEmails.length) {
+            setSelectedEmails([]);
+        } else {
+            setSelectedEmails(displayedEmails.map((email) => email.id));
+        }
+    };
+
+    const displayedEmails = emails.filter(
+        (email) => email.user && email.recipients.length > 0
+    );
 
     return (
         <div className="dashboard">
@@ -77,7 +99,22 @@ const Dashboard = () => {
                     <button
                         className="refresh-button"
                         onClick={() => fetchEmails(selectedFolder)}
-                    ></button>
+                    >
+                        Refresh
+                    </button>
+                    <div>
+                        <input
+                            type="checkbox"
+                            className="email-checkbox-all"
+                            checked={
+                                selectedEmails.length === displayedEmails.length
+                            }
+                            onChange={() =>
+                                handleSelectAllEmails(displayedEmails)
+                            }
+                        />
+                        <span>{selectedEmails.length} selected</span>
+                    </div>
                 </div>
                 {isEditorVisible && (
                     <Editor
@@ -150,39 +187,42 @@ const Dashboard = () => {
                             {loading ? (
                                 <div>Loading emails...</div>
                             ) : (
-                                emails
-                                    .filter(
-                                        (email) =>
-                                            email.user &&
-                                            email.recipients.length > 0
-                                    )
-                                    .map((email) => (
-                                        <li
-                                            key={email.id}
-                                            className="email-item"
+                                displayedEmails.map((email) => (
+                                    <li key={email.id} className="email-item">
+                                        <input
+                                            type="checkbox"
+                                            className="email-checkbox"
+                                            checked={selectedEmails.includes(
+                                                email.id
+                                            )}
+                                            onChange={() =>
+                                                handleSelectEmail(email.id)
+                                            }
+                                        />
+                                        {selectedFolder !== 1 &&
+                                            email.recipients.length > 0 && (
+                                                <div className="email-recipient">
+                                                    {email.recipients[0]
+                                                        .receiver_email ||
+                                                        "Unknown Recipient"}
+                                                </div>
+                                            )}
+                                        <div
+                                            className="email-subjectAndBody"
                                             onClick={() =>
                                                 handleEmailClick(email)
                                             }
                                         >
-                                            {selectedFolder !== 1 &&
-                                                email.recipients.length > 0 && (
-                                                    <div className="email-recipient">
-                                                        {email.recipients[0]
-                                                            .receiver_email ||
-                                                            "Unknown Recipient"}
-                                                    </div>
-                                                )}
-                                            <div className="email-subjectAndBody">
-                                                <span className="email-subject">
-                                                    {email.subject}
-                                                </span>{" "}
-                                                - {email.body}
-                                            </div>
-                                            <div>
-                                                {formatDate(email.created_at)}
-                                            </div>
-                                        </li>
-                                    ))
+                                            <span className="email-subject">
+                                                {email.subject}
+                                            </span>{" "}
+                                            - {email.body}
+                                        </div>
+                                        <div>
+                                            {formatDate(email.created_at)}
+                                        </div>
+                                    </li>
+                                ))
                             )}
                         </EmailList>
                     )}

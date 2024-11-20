@@ -97,6 +97,10 @@
   flex-direction: column;
 }
 
+* {
+  outline: 1px solid red;
+}
+
 body {
   font-family: "Lato", sans-serif;
   margin: 0;
@@ -106,6 +110,11 @@ body {
 
 .dashboard {
   display: flex;
+}
+
+.email-checkbox,
+.email-checkbox-all {
+  width: fit-content;
 }
 
 .sidebar {
