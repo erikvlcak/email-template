@@ -102,6 +102,11 @@ body {
     border-bottom: 1px solid #ddd;
     gap: 1rem;
     width: 80vw;
+    cursor: pointer;
+}
+
+.email-item:hover {
+    background-color: #f9f9f9;
 }
 
 .email-subjectAndBody {

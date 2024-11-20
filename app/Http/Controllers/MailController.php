@@ -109,7 +109,11 @@ class MailController extends Controller
             $query->where('folder_id', $request->input('folder_id'));
         }
 
-        $emails = $query->with('recipients')->orderBy('created_at', 'desc')->get();
+        if ($request->has('starred')) {
+            $query->where('is_starred', 1);
+        }
+
+        $emails = $query->with(['recipients', 'user'])->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
     }
 
