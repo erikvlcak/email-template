@@ -107,6 +107,12 @@ const Dashboard = () => {
             <div className="sidebar">
                 <h2>CBP Mail</h2>
                 <ul className="navigation">
+                    <button
+                        className="refresh-button"
+                        onClick={() => fetchEmails(selectedFolder)}
+                    >
+                        Refresh
+                    </button>
                     <button onClick={() => handleFolderClick(1)}>Inbox</button>
                     <button onClick={() => handleFolderClick(2)}>Sent</button>
                     <button onClick={() => handleFolderClick(3)}>All</button>
@@ -120,57 +126,62 @@ const Dashboard = () => {
             <div className="main-content">
                 <div className="fixed-top">
                     <Search />
-                    <button
-                        className="refresh-button"
-                        onClick={() => fetchEmails(selectedFolder)}
-                    >
-                        Refresh
-                    </button>
-                    <div>
-                        <input
-                            type="checkbox"
-                            className="email-checkbox-all"
-                            checked={
-                                selectedEmails.length === displayedEmails.length
-                            }
-                            onChange={() =>
-                                handleSelectAllEmails(displayedEmails)
-                            }
-                        />
-                        <span>{selectedEmails.length} selected</span>
-                        {selectedEmails.length > 0 && (
-                            <div>
-                                <span>Move selected emails to: </span>
-                                {selectedFolder !== 1 && (
-                                    <button
-                                        onClick={() => moveEmailsToFolder(1)}
-                                    >
-                                        Inbox
-                                    </button>
-                                )}
-                                {selectedFolder !== 2 && (
-                                    <button
-                                        onClick={() => moveEmailsToFolder(2)}
-                                    >
-                                        Sent
-                                    </button>
-                                )}
-                                {selectedFolder !== 4 && (
-                                    <button
-                                        onClick={() => moveEmailsToFolder(4)}
-                                    >
-                                        Drafts
-                                    </button>
-                                )}
-                                {selectedFolder !== 5 && (
-                                    <button
-                                        onClick={() => moveEmailsToFolder(5)}
-                                    >
-                                        Trash
-                                    </button>
-                                )}
-                            </div>
-                        )}
+                    <div className="top-options">
+                        <div className="top-select-info">
+                            <button
+                                onClick={() =>
+                                    handleSelectAllEmails(displayedEmails)
+                                }
+                            >
+                                Select all
+                            </button>
+
+                            <span>{selectedEmails.length} selected</span>
+                        </div>
+
+                        <div className="top-move">
+                            {selectedEmails.length > 0 && (
+                                <div className="top-move-buttons">
+                                    <span>Move selected emails to: </span>
+                                    {selectedFolder !== 1 && (
+                                        <button
+                                            onClick={() =>
+                                                moveEmailsToFolder(1)
+                                            }
+                                        >
+                                            Inbox
+                                        </button>
+                                    )}
+                                    {selectedFolder !== 2 && (
+                                        <button
+                                            onClick={() =>
+                                                moveEmailsToFolder(2)
+                                            }
+                                        >
+                                            Sent
+                                        </button>
+                                    )}
+                                    {selectedFolder !== 4 && (
+                                        <button
+                                            onClick={() =>
+                                                moveEmailsToFolder(4)
+                                            }
+                                        >
+                                            Drafts
+                                        </button>
+                                    )}
+                                    {selectedFolder !== 5 && (
+                                        <button
+                                            onClick={() =>
+                                                moveEmailsToFolder(5)
+                                            }
+                                        >
+                                            Trash
+                                        </button>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                 {isEditorVisible && (
@@ -245,7 +256,20 @@ const Dashboard = () => {
                                 <div>Loading emails...</div>
                             ) : (
                                 displayedEmails.map((email) => (
-                                    <li key={email.id} className="email-item">
+                                    <li
+                                        onClick={(e) => {
+                                            if (
+                                                e.target.type !== "checkbox" &&
+                                                e.target.classList.contains(
+                                                    "star"
+                                                ) === false
+                                            ) {
+                                                handleEmailClick(email);
+                                            }
+                                        }}
+                                        key={email.id}
+                                        className="email-item"
+                                    >
                                         <input
                                             className="email-checkbox"
                                             type="checkbox"
@@ -274,12 +298,7 @@ const Dashboard = () => {
                                                         "Unknown Recipient"}
                                                 </div>
                                             )}
-                                        <div
-                                            className="email-subjectAndBody"
-                                            onClick={() =>
-                                                handleEmailClick(email)
-                                            }
-                                        >
+                                        <div className="email-subjectAndBody">
                                             <span className="email-subject">
                                                 {email.subject}
                                             </span>{" "}

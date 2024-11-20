@@ -1,14 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-// * {
-//     outline: 1px solid red;
-// }
+* {
+    outline: 1px solid red;
+}
 
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.top-select-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.2rem;
+    gap: 1rem;
+}
+
+.select-all-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-options {
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+.top-move {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.top-move-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .star {
@@ -55,6 +88,10 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.top-options {
+    display: flex;
 }
 
 .navigation button {
