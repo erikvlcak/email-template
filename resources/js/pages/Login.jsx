@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import key from "../keys";
-import Profile from "../components/Profile";
-
 import UserContext from "../context/UserContext";
 
 export default function Login(props) {
@@ -17,24 +14,6 @@ export default function Login(props) {
         password: "",
     });
 
-    const loadImage = async () => {
-        try {
-            const response = await axios.get(
-                `https://api.unsplash.com/photos/random?client_id=${key}`
-            );
-            const data = response.data;
-            setBackgroundImg(data);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-
-        // setTimeout(loadImage, 30000);
-    };
-
-    useEffect(() => {
-        loadImage();
-    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -76,12 +55,7 @@ export default function Login(props) {
     };
 
     return (
-        <div
-            className="auth-body"
-            style={{
-                backgroundImage: `url(${backgroundImg?.urls.regular + "&fit"})`,
-            }}
-        >
+        <div className="auth-body">
             <div className="auth-wrapper">
                 <div className="auth-header">
                     <h1 className="auth-header-text">Welcome back</h1>
