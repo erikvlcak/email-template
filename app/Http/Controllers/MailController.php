@@ -122,4 +122,12 @@ class MailController extends Controller
         $emails = Email::where('folder_id', 1)->with('recipients')->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
     }
+
+
+    public function updateEmail(Request $request, $id)
+    {
+        $email = Email::findOrFail($id);
+        $email->update($request->all());
+        return response()->json(['message' => 'Email updated successfully!']);
+    }
 }

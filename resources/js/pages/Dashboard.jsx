@@ -4,7 +4,6 @@ import Editor from "../components/Editor";
 import EmailList from "../components/EmailList";
 import "../../css/style.scss";
 import Search from "../components/Search";
-import DashboardNavigation from "../components/DashboardNavigation";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -73,6 +72,32 @@ const Dashboard = () => {
         }
     };
 
+    const toggleStarred = async (email) => {
+        const updatedEmail = { ...email, is_starred: !email.is_starred };
+        try {
+            await axios.put(`/api/emails/${email.id}`, updatedEmail);
+            setEmails((prevEmails) =>
+                prevEmails.map((e) => (e.id === email.id ? updatedEmail : e))
+            );
+        } catch (error) {
+            console.error("Error updating email:", error);
+        }
+    };
+
+    const moveEmailsToFolder = async (folderId) => {
+        try {
+            await Promise.all(
+                selectedEmails.map((emailId) =>
+                    axios.put(`/api/emails/${emailId}`, { folder_id: folderId })
+                )
+            );
+            fetchEmails(selectedFolder); // Refresh the email list
+            setSelectedEmails([]); // Reset selected emails
+        } catch (error) {
+            console.error("Error moving emails:", error);
+        }
+    };
+
     const displayedEmails = emails.filter(
         (email) => email.user && email.recipients.length > 0
     );
@@ -95,7 +120,6 @@ const Dashboard = () => {
             <div className="main-content">
                 <div className="fixed-top">
                     <Search />
-                    <DashboardNavigation />
                     <button
                         className="refresh-button"
                         onClick={() => fetchEmails(selectedFolder)}
@@ -114,6 +138,39 @@ const Dashboard = () => {
                             }
                         />
                         <span>{selectedEmails.length} selected</span>
+                        {selectedEmails.length > 0 && (
+                            <div>
+                                <span>Move selected emails to: </span>
+                                {selectedFolder !== 1 && (
+                                    <button
+                                        onClick={() => moveEmailsToFolder(1)}
+                                    >
+                                        Inbox
+                                    </button>
+                                )}
+                                {selectedFolder !== 2 && (
+                                    <button
+                                        onClick={() => moveEmailsToFolder(2)}
+                                    >
+                                        Sent
+                                    </button>
+                                )}
+                                {selectedFolder !== 4 && (
+                                    <button
+                                        onClick={() => moveEmailsToFolder(4)}
+                                    >
+                                        Drafts
+                                    </button>
+                                )}
+                                {selectedFolder !== 5 && (
+                                    <button
+                                        onClick={() => moveEmailsToFolder(5)}
+                                    >
+                                        Trash
+                                    </button>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
                 {isEditorVisible && (
@@ -190,8 +247,8 @@ const Dashboard = () => {
                                 displayedEmails.map((email) => (
                                     <li key={email.id} className="email-item">
                                         <input
-                                            type="checkbox"
                                             className="email-checkbox"
+                                            type="checkbox"
                                             checked={selectedEmails.includes(
                                                 email.id
                                             )}
@@ -199,6 +256,16 @@ const Dashboard = () => {
                                                 handleSelectEmail(email.id)
                                             }
                                         />
+                                        <div
+                                            className={`star ${
+                                                email.is_starred
+                                                    ? "starred"
+                                                    : ""
+                                            }`}
+                                            onClick={() => toggleStarred(email)}
+                                        >
+                                            ★
+                                        </div>
                                         {selectedFolder !== 1 &&
                                             email.recipients.length > 0 && (
                                                 <div className="email-recipient">
