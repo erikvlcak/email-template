@@ -104,8 +104,29 @@ body {
   box-sizing: border-box;
 }
 
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  color: rgba(128, 128, 128, 0.108);
+  text-align: center;
+  font-size: 30px;
+}
+
+.star.starred {
+  color: rgb(253, 194, 15);
+}
+
 .dashboard {
   display: flex;
+}
+
+.email-checkbox,
+.email-checkbox-all {
+  width: fit-content;
 }
 
 .sidebar {
@@ -138,6 +159,9 @@ body {
   padding-left: 1rem;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  border: 2px solid gainsboro;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .navigation button.active {
@@ -170,16 +194,16 @@ body {
   top: 0;
   left: 220px; /* Adjust this value based on the width of the sidebar */
   right: 0;
-  background-color: white;
+  background-color: #f1f1f1;
   z-index: 1000;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .email-list {
-  margin-top: 120px; /* Adjust this value based on the height of the fixed top elements */
+  margin-top: 10rem; /* Adjust this value based on the height of the fixed top elements */
   overflow-y: auto;
-  height: calc(100vh - 140px); /* Adjust this value based on the height of the fixed top elements */
+  height: fit-content;
 }
 
 .email-item {
@@ -193,6 +217,11 @@ body {
   border-bottom: 1px solid #ddd;
   gap: 1rem;
   width: 80vw;
+  cursor: pointer;
+}
+
+.email-item:hover {
+  background-color: #f9f9f9;
 }
 
 .email-subjectAndBody {

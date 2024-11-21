@@ -109,7 +109,11 @@ class MailController extends Controller
             $query->where('folder_id', $request->input('folder_id'));
         }
 
-        $emails = $query->with('recipients')->orderBy('created_at', 'desc')->get();
+        if ($request->has('starred')) {
+            $query->where('is_starred', 1);
+        }
+
+        $emails = $query->with(['recipients', 'user'])->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
     }
 
@@ -117,5 +121,13 @@ class MailController extends Controller
     {
         $emails = Email::where('folder_id', 1)->with('recipients')->orderBy('created_at', 'desc')->get();
         return response()->json($emails);
+    }
+
+
+    public function updateEmail(Request $request, $id)
+    {
+        $email = Email::findOrFail($id);
+        $email->update($request->all());
+        return response()->json(['message' => 'Email updated successfully!']);
     }
 }
