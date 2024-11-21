@@ -9,6 +9,7 @@ use App\Models\Email;
 use App\Models\Recipient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class MailController extends Controller
 {
@@ -32,7 +33,7 @@ class MailController extends Controller
 
         // Save the sent email into the database
         $email = Email::create([
-            'sender_id' => 1, // Assuming the sender is a user with ID 1
+            'sender_id' => Auth::id() ?? 1, // Assuming the sender is a user with ID 1
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
             'folder_id' => 2, // Set folder_id to 2 for sent emails
             'subject' => $emailSubject,

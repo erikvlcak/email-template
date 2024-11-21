@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Profile from "./Profile";
 
-export default function Search({}) {
+export default function Search({handleEmailClick, displayedEmails}) {
     const [query, setQuery] = useState("");
     const [mails, setMails] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [error, setError] = useState(null);
 
-    // Fetch mails from the API
+
     const loadMails = async () => {
         try {
             const response = await axios.get("/api/emails");
@@ -18,21 +19,22 @@ export default function Search({}) {
         }
     };
 
-    // Debounce the search to improve performance
+
+    
     useEffect(() => {
         const timer = setTimeout(() => {
             if (query.trim()) {
                 setFiltered(
                     mails.filter((mail) =>
                         mail.subject.toLowerCase().includes(query.toLowerCase())
-                    ).slice(0, 5)
+                    )
                 );
             } else {
                 setFiltered([]);
             }
-        }, 300); // Debounce delay
+        }); 
 
-        return () => clearTimeout(timer); // Cleanup debounce
+        return () => clearTimeout(timer); 
     }, [query, mails]);
 
     useEffect(() => {
@@ -43,7 +45,7 @@ export default function Search({}) {
         <div className="page-top">
             <div className="searchBarComponent">
                 <div className="searchBar">
-                    <input
+                    <input className="search-input"
                         type="text"
                         placeholder="Search"
                         value={query}
@@ -53,7 +55,7 @@ export default function Search({}) {
                         <div className="searched-mails">
                             {filtered.length > 0 ? (
                                 filtered.map((mail) => (
-                                    <div onClick={()=>{{}}} key={mail.id} className="mail">
+                                    <div onClick={()=>{{handleEmailClick(mail), setQuery("")}}} key={mail.id} className="mail" >
                                         <div className="mail-subject">{mail.subject}</div>
                                         <div className="mail-sender">{mail.user.email}</div>
                                     </div>

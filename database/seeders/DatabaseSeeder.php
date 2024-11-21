@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            //UsersTableSeeder::class,
-            //FoldersTableSeeder::class,
-            //EmailsTableSeeder::class,
-            //RecipientsTableSeeder::class,
-            EmailRecipientTableSeeder::class,
+            // UsersTableSeeder::class,
+            // FoldersTableSeeder::class,
+            // EmailsTableSeeder::class,
+            // RecipientsTableSeeder::class,
+            // EmailRecipientTableSeeder::class,
         ]);
     }
 }

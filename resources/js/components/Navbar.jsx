@@ -6,7 +6,7 @@ export default function Navbar({
 }) {
     return (
         <div className="sidebar">
-            <h2>CBP Mail</h2>
+            <h2 className="logo-cbp" onClick={() => handleFolderClick(1)}>CBP Mail</h2>
 
             <button
                 className="refresh-button"

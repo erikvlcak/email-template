@@ -117,7 +117,7 @@ const Dashboard = () => {
 
             <div className="main-content">
                 <div className="fixed-top">
-                    <Search />
+                    <Search handleEmailClick={handleEmailClick} displayedEmails={displayedEmails}/>
                     <div className="top-options">
                         <div className="top-select-info">
                             <button

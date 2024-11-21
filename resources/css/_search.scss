@@ -1,4 +1,10 @@
-
+.logo-cbp{
+    &:hover{
+        background-color: black;
+        color: white;
+        cursor: pointer;
+    }
+}
 .page-top {
     display: flex;
     position: relative;
@@ -17,7 +23,7 @@
 
 }
 
-input {
+.search-input {
     width: 95%;
     padding: 1rem;
     border-radius: 15px 15px 0px 0px;
@@ -39,6 +45,8 @@ input {
     top: 80%;
     border: 1px solid black;
     border-radius: 0px 0px 15px 15px;
+    max-height: 20rem;
+    overflow-y: scroll;
     
     .mail{
         background-color: white;
@@ -53,6 +61,7 @@ input {
         &:hover{
             background-color: black;
             color: white;
+            cursor: pointer;
         }
     }
 
