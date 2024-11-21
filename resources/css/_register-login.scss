@@ -10,8 +10,8 @@ body{
     border-radius: 2rem;
     min-width: 30rem;
     padding: 2rem;
-    opacity: 0.95;
-
+    opacity: 0.92;
+    height: 90%;
 
     .auth-header{
         display: flex;
@@ -44,16 +44,21 @@ body{
     }
 }
 
-.auth-body{
+.auth-body {
     align-items: center;
     display: flex;
-    height: 92vh;
-    background-color: blue;
+    height: 92.5vh;
+    background-color: rgb(238, 238, 238);
     margin: 0;
     padding: 2rem;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    transition: background-image 1s ease-in-out;
+}
+
+.auth-body.fade {
+    opacity: 0;
 }
 
 .auth-form{
@@ -65,7 +70,6 @@ body{
     width: 100%;
 
     input{
-        height: 3rem;
         width: 80%;
         border: 1px solid lightcoral;
         border-radius: 10px;

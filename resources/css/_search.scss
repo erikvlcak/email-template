@@ -1,23 +1,103 @@
-input {
-    width: 50%;
-    padding: 1rem;
-    border-radius: 15px;
+.logo-cbp{
+    &:hover{
+        background-color: black;
+        color: white;
+        cursor: pointer;
+    }
 }
-
 .page-top {
     display: flex;
-    justify-content: space-between;
+    position: relative;
+    //background-color: red;
+    height: 10%;
 }
 
+
 .searchBar {
-    flex: 1;
     display: flex;
-    align-items: center;
+    flex: 1;
+    flex-direction: column; 
     gap: 2rem;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+}
+
+.search-input {
+    width: 95%;
+    padding: 1rem;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .profile {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.searched-mails{
+    display: flex;
+    flex-direction: column;
+    //background-color: #f1f1f1;
+    align-content: flex-start;
+    width: 69.7%;
+    position: absolute;
+    top: 80%;
+    border: 1px solid black;
+    border-radius: 0px 0px 15px 15px;
+    max-height: 20rem;
+    overflow-y: scroll;
+    
+    .mail{
+        background-color: white;
+        
+        height: fit-content;
+        padding: 1rem;
+        //border-radius: 0px 0px 15px 15px;
+        font-size: larger;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &:hover{
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+    }
+
+    .search-query{
+        background-color: white;
+        border-top: 1px solid black;
+        height: fit-content;
+        padding: 1rem;
+        border-radius: 0px 0px 15px 15px;
+        
+        font-size: larger;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .mail-no-results{
+        background-color: white;
+        
+        height: fit-content;
+        padding: 1rem;
+        border-radius: 0px 0px 15px 15px;
+        font-size: larger;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+}
+
+.searchBarComponent{
+    //background-color: white;
+    width: 70%;
+    padding: 1rem;
+    border-radius: 15px;
+    
+    
+    
 }

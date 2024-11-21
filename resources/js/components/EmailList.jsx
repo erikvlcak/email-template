@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
 
 export default function EmailList({
     loading,
@@ -9,13 +11,27 @@ export default function EmailList({
     handleSelectEmail,
     toggleStarred,
     formatDate,
-}) {
+}) 
+{
+    const { user } = useContext(UserContext);
+    const [userEmails, setUserEmails] = useState([]);
+    
+    useEffect(() => {
+        const emails = displayedEmails.filter(
+            (email) => email.user.email === user?.email
+        );
+
+        console.log(displayedEmails);
+
+        setUserEmails(emails);
+    }, [displayedEmails])
+
     return (
         <>
             {loading ? (
                 <div>Loading emails...</div>
             ) : (
-                displayedEmails.map((email) => (
+                userEmails.map((email) => (
                     <li
                         onClick={(e) => {
                             if (

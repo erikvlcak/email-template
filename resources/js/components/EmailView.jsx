@@ -22,7 +22,7 @@ const EmailView = ({ selectedEmail, formatDate, onEmailSent }) => {
                         </td>
                         <td>
                             {selectedEmail.user
-                                ? selectedEmail.user.name
+                                ? selectedEmail.user?.email
                                 : "Unknown User"}
                         </td>
                     </tr>
@@ -30,7 +30,7 @@ const EmailView = ({ selectedEmail, formatDate, onEmailSent }) => {
                         <td>
                             <strong>Recipient:</strong>
                         </td>
-                        <td>{selectedEmail.recipients[0].receiver_email}</td>
+                        <td>{selectedEmail.recipients[0]?.receiver_email}</td>
                     </tr>
                     <tr>
                         <td>

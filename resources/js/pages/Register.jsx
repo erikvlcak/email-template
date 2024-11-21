@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 
-import key from "../keys";
-
-import Logout from "../components/Logout";
-import Login from "./Login";
-import Search from "../components/Search";
+import UserContext from "../context/UserContext";
 
 export default function Register(props) {
-    const [backgroundImg, setBackgroundImg] = useState(null);
-    const navigate = useNavigate();
+    const { getUser } = useContext(UserContext);
+
+    const [backgroundImg, setBackgroundImg] = useState(0);
+    const [imageFiles, setImagesFiles] = useState([]);
+
     const [values, setValues] = useState({
         email: "",
         firstname: "",
@@ -20,25 +18,8 @@ export default function Register(props) {
         password: "",
         password_confirmation: "",
     });
-
-    const loadImage = async () => {
-        try {
-            const response = await axios.get(
-                `https://api.unsplash.com/photos/random?client_id=${key}`
-            );
-            const data = response.data;
-            setBackgroundImg(data);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-
-        // setTimeout(loadImage, 30000);
-    };
-
-    useEffect(() => {
-        //loadImage();
-    }, []);
+    
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -50,6 +31,7 @@ export default function Register(props) {
             // get the (already JSON-parsed) response data
             if (response.status === 200 || response.status === 201) {
                 // Redirect to the main page after successful registration
+                getUser();
                 navigate("/");
             }
         } catch (error) {
@@ -78,12 +60,30 @@ export default function Register(props) {
         });
     };
 
+    useEffect(() => {
+        const images = [];
+        for (let index = 1; index < 21; index++) {
+            images.push(`../bgrImg/image-${index}.jpg`);
+        }
+        setImagesFiles(images);
+    }, []); 
+    
+    useEffect(() => {
+        if (imageFiles.length > 0) {
+            const interval = setInterval(() => {
+                setBackgroundImg((prevIndex) => (prevIndex + 1) % imageFiles.length);
+            }, 5000);
+    
+            return () => clearInterval(interval);
+        }
+    }, [imageFiles]); 
+    
+
     return (
-        <div
-            className="auth-body"
-            style={{
-                backgroundImage: `url(${backgroundImg?.urls.regular + "&fit"})`,
-            }}
+        <div className="auth-body"
+        style={{
+            backgroundImage: `url(${imageFiles[backgroundImg]})`,
+        }}
         >
             <div className="auth-wrapper">
                 <div className="auth-header">
