@@ -1,39 +1,46 @@
 import { useState } from "react";
 import Profile from "./Profile";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function Search() {
     const [query, setQuery] = useState("");
-    const [displayedProfile, setDisplayedProfile] = useState(false);
+    const [mails, setMails] = useState(null);
+
+    const loadMails = async () =>{
+        const response = await axios.get("/api/emails");
+        const data = await response.data;
+        console.log(data);
+
+        setMails(data);
+    };
+
+    useEffect(()=>{
+        loadMails();
+    },[])
 
     return (
         <>
             <div className="page-top">
-                <div className="searchBar">
-                    <input
-                        onChange={(e) => setQuery(e.target.value)}
-                        type="text"
-                        placeholder="Search"
-                        value={query}
-                    />
-
-                    {query && (
-                        <button onClick={() => setQuery("")}>Clear</button>
-                    )}
-
-                    <button>Filter</button>
-                </div>
-                <div className="profile">
-                    <button
-                        onClick={() => setDisplayedProfile(!displayedProfile)}
-                    >
-                        {displayedProfile ? (
-                            "Profile"
-                        ) : (
-                            <div className="development">
-                                <Profile />
+                <div className="searchBarComponent">
+                    <div className='searchBar' >
+                        <input
+                            onChange={(e) => setQuery(e.target.value)}
+                            type="text"
+                            placeholder="Search"
+                            value={query}
+                        />
+                        {query ? (
+                            <div className="searched-mails">
+                            <div className="mail">{mails[0]?.subject}</div>
+                            <div className="mail">{mails[1]?.subject}</div>
+                            <div className="mail">{mails[2]?.subject}</div>
+                            <div className="mail">{mails[3]?.subject}</div>
+                            <div className="mail">{mails[4]?.subject}</div>
                             </div>
-                        )}
-                    </button>
+                            
+                        ) : (null)}
+                    </div>
                 </div>
             </div>
         </>

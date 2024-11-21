@@ -8,7 +8,8 @@ export default function Login(props) {
     const { getUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const [backgroundImg, setBackgroundImg] = useState(null);
+    const [backgroundImg, setBackgroundImg] = useState(0);
+    const [imageFiles, setImagesFiles] = useState([]);
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -54,8 +55,30 @@ export default function Login(props) {
         });
     };
 
+    useEffect(() => {
+        const images = [];
+        for (let index = 1; index < 21; index++) {
+            images.push(`../bgrImg/image-${index}.jpg`);
+        }
+        setImagesFiles(images);
+    }, []); 
+    
+    useEffect(() => {
+        if (imageFiles.length > 0) {
+            const interval = setInterval(() => {
+                setBackgroundImg((prevIndex) => (prevIndex + 1) % imageFiles.length);
+            }, 5000);
+    
+            return () => clearInterval(interval);
+        }
+    }, [imageFiles]); 
+
     return (
-        <div className="auth-body">
+        <div className="auth-body"
+        style={{
+            backgroundImage: `url(${imageFiles[backgroundImg]})`,
+        }}
+        >
             <div className="auth-wrapper">
                 <div className="auth-header">
                     <h1 className="auth-header-text">Welcome back</h1>

@@ -62,19 +62,22 @@ export default function Register(props) {
 
     useEffect(() => {
         const images = [];
-
         for (let index = 1; index < 21; index++) {
-            images.push('../bgrImg/image-' + index + '.jpg');
+            images.push(`../bgrImg/image-${index}.jpg`);
         }
-
         setImagesFiles(images);
-
-        const interval = setInterval(() => {
-            setBackgroundImg((prevIndex) => (prevIndex + 1) % imageFiles.length);
-        }, 5000); 
-
-        return () => clearInterval(interval);
-    }, [])
+    }, []); 
+    
+    useEffect(() => {
+        if (imageFiles.length > 0) {
+            const interval = setInterval(() => {
+                setBackgroundImg((prevIndex) => (prevIndex + 1) % imageFiles.length);
+            }, 5000);
+    
+            return () => clearInterval(interval);
+        }
+    }, [imageFiles]); 
+    
 
     return (
         <div className="auth-body"
