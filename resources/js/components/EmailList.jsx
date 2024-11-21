@@ -18,7 +18,7 @@ export default function EmailList({
     
     useEffect(() => {
         const emails = displayedEmails.filter(
-            (email) => email.user.email === user?.email
+            (email) => email.user.id === user.id
         );
 
         console.log(displayedEmails);
