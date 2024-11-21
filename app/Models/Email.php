@@ -28,9 +28,4 @@ class Email extends Model
    {
       return $this->hasMany(Recipient::class);
    }
-
-   public function folder()
-   {
-      return $this->belongsTo(Folder::class);
-   }
 }
