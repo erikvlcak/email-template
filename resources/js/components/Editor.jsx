@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import "../../css/style.scss";
 
-const Editor = ({ onEmailSent, onClose }) => {
-    const [email, setEmail] = useState("");
-    const [subject, setSubject] = useState("");
+const Editor = ({
+    onEmailSent,
+    onClose,
+    initialEmail = "",
+    initialSubject = "",
+}) => {
+    const [email, setEmail] = useState(initialEmail);
+    const [subject, setSubject] = useState(initialSubject);
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
+
+    useEffect(() => {
+        setEmail(initialEmail);
+        setSubject(initialSubject);
+    }, [initialEmail, initialSubject]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,6 +67,7 @@ const Editor = ({ onEmailSent, onClose }) => {
                     />
                 </div>
                 <button type="submit">Send</button>
+                <button>Save to drafts</button>
             </form>
             {status && <p>{status}</p>}
         </div>

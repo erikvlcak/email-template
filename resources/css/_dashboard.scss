@@ -4,15 +4,23 @@
     font-family: "Poppins", sans-serif;
 }
 
-// * {
-//     outline: 1px solid red;
-// }
+* {
+    outline: 1px solid red;
+}
 
 body {
-    font-family: "Lato", sans-serif;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-weight: 400;
+    font-size: 1rem;
 }
 
 .top-select-info {
@@ -86,12 +94,15 @@ body {
 
 .sidebar h2 {
     margin-top: 0;
+    text-align: center;
+    font-size: 2.5rem;
 }
 
 .navigation {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 3rem;
 }
 
 .top-options {
@@ -107,17 +118,24 @@ body {
     padding-left: 1rem;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
     border: 2px solid gainsboro;
     font-weight: bold;
     font-size: 1rem;
+    border-left: 0px;
 }
 
+.navigation button:hover,
 .navigation button.active {
-    font-weight: bold;
+    background-color: #000000;
+    color: white;
 }
 
-.navigation button:hover {
-    background-color: #ddd;
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .sidebar ul {
@@ -135,6 +153,28 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+.refresh-button {
+    background: none;
+    border: none;
+    padding: 10px 0;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 1rem;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border: 2px solid black;
+    font-weight: bold;
+    font-size: 1rem;
+    border-left: 0px;
+}
+
+.refresh-button:hover {
+    background-color: #000000;
+    color: white;
 }
 
 .fixed-top {
@@ -190,6 +230,18 @@ body {
     white-space: nowrap;
     flex: 1;
     color: #000000cb;
+}
+
+.email-view {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.email-view__return-button,
+.email-view__respond-button {
+    width: fit-content;
 }
 
 .compose-button {

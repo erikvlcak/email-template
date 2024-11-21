@@ -5,6 +5,8 @@ import EmailList from "../components/EmailList";
 import "../../css/style.scss";
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import EmailView from "../components/EmailView";
 
 const Dashboard = () => {
     const [emails, setEmails] = useState([]);
@@ -13,6 +15,7 @@ const Dashboard = () => {
     const [selectedFolder, setSelectedFolder] = useState(1); // Default to Inbox
     const [loading, setLoading] = useState(false);
     const [selectedEmails, setSelectedEmails] = useState([]);
+    const [activeButton, setActiveButton] = useState(1); // Default to Inbox
 
     useEffect(() => {
         fetchEmails(selectedFolder);
@@ -45,6 +48,7 @@ const Dashboard = () => {
         setSelectedFolder(folderId);
         setSelectedEmail(null); // Reset selected email when changing folders
         setSelectedEmails([]); // Reset selected emails when changing folders
+        setActiveButton(folderId); // Set the active button
     };
 
     const handleEmailClick = (email) => {
@@ -104,25 +108,13 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <div className="sidebar">
-                <h2>CBP Mail</h2>
-                <ul className="navigation">
-                    <button
-                        className="refresh-button"
-                        onClick={() => fetchEmails(selectedFolder)}
-                    >
-                        Refresh
-                    </button>
-                    <button onClick={() => handleFolderClick(1)}>Inbox</button>
-                    <button onClick={() => handleFolderClick(2)}>Sent</button>
-                    <button onClick={() => handleFolderClick(3)}>All</button>
-                    <button onClick={() => handleFolderClick(4)}>Drafts</button>
-                    <button onClick={() => handleFolderClick(5)}>Trash</button>
-                    <button onClick={() => handleFolderClick("starred")}>
-                        Starred
-                    </button>
-                </ul>
-            </div>
+            <Navbar
+                fetchEmails={fetchEmails}
+                handleFolderClick={handleFolderClick}
+                selectedFolder={selectedFolder}
+                activeButton={activeButton}
+            />
+
             <div className="main-content">
                 <div className="fixed-top">
                     <Search />
@@ -136,13 +128,16 @@ const Dashboard = () => {
                                 Select all
                             </button>
 
-                            <span>{selectedEmails.length} selected</span>
+                            <div>
+                                <strong>{selectedEmails.length} </strong>
+                                selected
+                            </div>
                         </div>
 
                         <div className="top-move">
                             {selectedEmails.length > 0 && (
                                 <div className="top-move-buttons">
-                                    <span>Move selected emails to: </span>
+                                    <span>Move selected email(s) to: </span>
                                     {selectedFolder !== 1 && (
                                         <button
                                             onClick={() =>
@@ -195,122 +190,22 @@ const Dashboard = () => {
                 </button>
                 <div className="email-list">
                     {selectedEmail ? (
-                        <div>
-                            <button onClick={() => setSelectedEmail(null)}>
-                                Back to List
-                            </button>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>User:</strong>
-                                        </td>
-                                        <td>
-                                            {selectedEmail.user
-                                                ? selectedEmail.user.name
-                                                : "Unknown User"}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Recipient:</strong>
-                                        </td>
-                                        <td>
-                                            {
-                                                selectedEmail.recipients[0]
-                                                    .receiver_email
-                                            }
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Subject:</strong>
-                                        </td>
-                                        <td>{selectedEmail.subject}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Date:</strong>
-                                        </td>
-                                        <td>
-                                            {formatDate(
-                                                selectedEmail.created_at
-                                            )}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            {selectedEmail.html ? (
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: selectedEmail.html,
-                                    }}
-                                />
-                            ) : (
-                                <div>{selectedEmail.body}</div>
-                            )}
-                        </div>
+                        <EmailView
+                            selectedEmail={selectedEmail}
+                            setSelectedEmail={setSelectedEmail}
+                            formatDate={formatDate}
+                        />
                     ) : (
-                        <EmailList>
-                            {loading ? (
-                                <div>Loading emails...</div>
-                            ) : (
-                                displayedEmails.map((email) => (
-                                    <li
-                                        onClick={(e) => {
-                                            if (
-                                                e.target.type !== "checkbox" &&
-                                                e.target.classList.contains(
-                                                    "star"
-                                                ) === false
-                                            ) {
-                                                handleEmailClick(email);
-                                            }
-                                        }}
-                                        key={email.id}
-                                        className="email-item"
-                                    >
-                                        <input
-                                            className="email-checkbox"
-                                            type="checkbox"
-                                            checked={selectedEmails.includes(
-                                                email.id
-                                            )}
-                                            onChange={() =>
-                                                handleSelectEmail(email.id)
-                                            }
-                                        />
-                                        <div
-                                            className={`star ${
-                                                email.is_starred
-                                                    ? "starred"
-                                                    : ""
-                                            }`}
-                                            onClick={() => toggleStarred(email)}
-                                        >
-                                            ★
-                                        </div>
-                                        {selectedFolder !== 1 &&
-                                            email.recipients.length > 0 && (
-                                                <div className="email-recipient">
-                                                    {email.recipients[0]
-                                                        .receiver_email ||
-                                                        "Unknown Recipient"}
-                                                </div>
-                                            )}
-                                        <div className="email-subjectAndBody">
-                                            <span className="email-subject">
-                                                {email.subject}
-                                            </span>{" "}
-                                            - {email.body}
-                                        </div>
-                                        <div>
-                                            {formatDate(email.created_at)}
-                                        </div>
-                                    </li>
-                                ))
-                            )}
-                        </EmailList>
+                        <EmailList
+                            loading={loading}
+                            displayedEmails={displayedEmails}
+                            selectedEmails={selectedEmails}
+                            selectedFolder={selectedFolder}
+                            handleEmailClick={handleEmailClick}
+                            handleSelectEmail={handleSelectEmail}
+                            toggleStarred={toggleStarred}
+                            formatDate={formatDate}
+                        />
                     )}
                 </div>
             </div>
