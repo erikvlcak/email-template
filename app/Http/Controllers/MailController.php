@@ -74,7 +74,7 @@ class MailController extends Controller
 
         // Save the received email into the database
         $email = Email::create([
-            'sender_id' => 1, // Assuming the sender is a user with ID 1
+            'sender_id' => Auth::id() ?? 1, // Assuming the sender is a user with ID 1
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
             'folder_id' => 1, // Set folder_id to 1 for received emails
             'subject' => $subject,

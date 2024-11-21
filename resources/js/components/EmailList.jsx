@@ -11,20 +11,24 @@ export default function EmailList({
     handleSelectEmail,
     toggleStarred,
     formatDate,
-}) 
-{
+}) {
     const { user } = useContext(UserContext);
     const [userEmails, setUserEmails] = useState([]);
-    
-    useEffect(() => {
-        const emails = displayedEmails.filter(
-            (email) => email.user.email === user?.email
-        );
 
+    useEffect(() => {
+        const emails = displayedEmails.filter((email) => {
+            return (
+                email.recipients[0].receiver_email == user?.email ||
+                email.recipients[0].receiver_email ==
+                    "test@sandboxa0ac285d67634ae6aa635e7b76c21c6b.mailgun.org"
+            );
+        });
+
+        console.log(emails);
         console.log(displayedEmails);
 
         setUserEmails(emails);
-    }, [displayedEmails])
+    }, [displayedEmails]);
 
     return (
         <>
