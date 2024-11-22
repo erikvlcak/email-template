@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../context/UserContext";
 import Editor from "./Editor";
 
-const EmailView = ({ selectedEmail, formatDate, onEmailSent }) => {
+const EmailView = ({
+    selectedEmail,
+    formatDate,
+    onEmailSent,
+    selectedFolder,
+}) => {
+    const { user } = useContext(UserContext);
     const [isEditorVisible, setIsEditorVisible] = useState(false);
 
     const handleRespondClick = () => {
@@ -16,22 +23,38 @@ const EmailView = ({ selectedEmail, formatDate, onEmailSent }) => {
         <div>
             <table>
                 <tbody>
-                    <tr>
-                        <td>
-                            <strong>User:</strong>
-                        </td>
-                        <td>
-                            {selectedEmail.user
-                                ? selectedEmail.user?.email
-                                : "Unknown User"}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Recipient:</strong>
-                        </td>
-                        <td>{selectedEmail.recipients[0]?.receiver_email}</td>
-                    </tr>
+                    {selectedFolder === 1 && (
+                        <tr>
+                            <td>
+                                <strong>From:</strong>
+                            </td>
+                            <td>
+                                {selectedEmail.user
+                                    ? selectedEmail.user.email
+                                    : "Unknown User"}
+                            </td>
+                        </tr>
+                    )}
+                    {selectedFolder === 2 && (
+                        <tr>
+                            <td>
+                                <strong>To:</strong>
+                            </td>
+                            <td>
+                                {selectedEmail.recipients[0]?.receiver_email}
+                            </td>
+                        </tr>
+                    )}
+                    {selectedFolder !== 1 && selectedFolder !== 2 && (
+                        <tr>
+                            <td>
+                                <strong>Recipient:</strong>
+                            </td>
+                            <td>
+                                {selectedEmail.recipients[0]?.receiver_email}
+                            </td>
+                        </tr>
+                    )}
                     <tr>
                         <td>
                             <strong>Subject:</strong>
@@ -61,7 +84,7 @@ const EmailView = ({ selectedEmail, formatDate, onEmailSent }) => {
                 <Editor
                     onEmailSent={onEmailSent}
                     onClose={handleCloseEditor}
-                    initialEmail={selectedEmail.recipients[0].receiver_email}
+                    initialEmail={selectedEmail.recipients[0]?.receiver_email}
                     initialSubject={`Re: ${selectedEmail.subject}`}
                 />
             )}

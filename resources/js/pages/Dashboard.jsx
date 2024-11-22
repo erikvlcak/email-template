@@ -35,6 +35,7 @@ const Dashboard = () => {
                 response = await axios.get(`/api/emails?folder_id=${folderId}`);
             }
             setEmails(response.data);
+            console.log("Emails:", emails);
             setLoading(false);
         } catch (error) {
             console.error("Error fetching emails:", error);
@@ -104,6 +105,20 @@ const Dashboard = () => {
         }
     };
 
+    const deleteSelectedEmails = async () => {
+        try {
+            await Promise.all(
+                selectedEmails.map((emailId) =>
+                    axios.delete(`/api/emails/${emailId}`)
+                )
+            );
+            fetchEmails(selectedFolder); // Refresh the email list
+            setSelectedEmails([]); // Reset selected emails
+        } catch (error) {
+            console.error("Error deleting emails:", error);
+        }
+    };
+
     const displayedEmails = emails.filter((item) =>
         // item.user.email === user?.email ||
         // item.user.email ===
@@ -151,41 +166,23 @@ const Dashboard = () => {
                         <div className="top-move">
                             {selectedEmails.length > 0 && (
                                 <div className="top-move-buttons">
-                                    <span>Move selected email(s) to: </span>
-                                    {selectedFolder !== 1 && (
-                                        <button
-                                            onClick={() =>
-                                                moveEmailsToFolder(1)
-                                            }
-                                        >
-                                            Inbox
-                                        </button>
-                                    )}
-                                    {selectedFolder !== 2 && (
-                                        <button
-                                            onClick={() =>
-                                                moveEmailsToFolder(2)
-                                            }
-                                        >
-                                            Sent
-                                        </button>
-                                    )}
-                                    {selectedFolder !== 4 && (
-                                        <button
-                                            onClick={() =>
-                                                moveEmailsToFolder(4)
-                                            }
-                                        >
-                                            Drafts
-                                        </button>
-                                    )}
                                     {selectedFolder !== 5 && (
                                         <button
                                             onClick={() =>
                                                 moveEmailsToFolder(5)
                                             }
                                         >
-                                            Trash
+                                            Move selected to Trash
+                                        </button>
+                                    )}
+                                    {selectedFolder == 5 && (
+                                        <button
+                                            className="button-delete"
+                                            onClick={
+                                                () => deleteSelectedEmails() //delete emails
+                                            }
+                                        >
+                                            Delete selected
                                         </button>
                                     )}
                                 </div>
@@ -205,12 +202,14 @@ const Dashboard = () => {
                 <div className="email-list">
                     {selectedEmail ? (
                         <EmailView
+                            selectedFolder={selectedFolder}
                             selectedEmail={selectedEmail}
                             setSelectedEmail={setSelectedEmail}
                             formatDate={formatDate}
                         />
                     ) : (
                         <EmailList
+                            emails={emails}
                             loading={loading}
                             displayedEmails={displayedEmails}
                             selectedEmails={selectedEmails}
