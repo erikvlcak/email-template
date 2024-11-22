@@ -196,9 +196,10 @@ const Dashboard = () => {
                         onClose={toggleEditor}
                     />
                 )}
-                <button className="compose-button" onClick={toggleEditor}>
+                <div className="compose-button" onClick={toggleEditor}>
                     +
-                </button>
+                </div>
+
                 <div className="email-list">
                     {selectedEmail ? (
                         <EmailView
