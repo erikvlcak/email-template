@@ -104,8 +104,17 @@ const Dashboard = () => {
         }
     };
 
-    const displayedEmails = emails.filter(
-        (email) => email.user.email == user?.email
+    const displayedEmails = emails.filter((item) =>
+        // item.user.email === user?.email ||
+        // item.user.email ===
+        //     "sandboxa0ac285d67634ae6aa635e7b76c21c6b.mailgun.org" ||
+        item.recipients.some(
+            (recipient) =>
+                recipient.receiver_email === "erikvlcak1@gmail.com" ||
+                recipient.receiver_email === "vasulhavruliv1.c@gmail.com" ||
+                recipient.receiver_email ===
+                    "test@sandboxa0ac285d67634ae6aa635e7b76c21c6b.mailgun.org"
+        )
     );
 
     return (
@@ -119,7 +128,10 @@ const Dashboard = () => {
 
             <div className="main-content">
                 <div className="fixed-top">
-                    <Search handleEmailClick={handleEmailClick} displayedEmails={displayedEmails}/>
+                    <Search
+                        handleEmailClick={handleEmailClick}
+                        displayedEmails={displayedEmails}
+                    />
                     <div className="top-options">
                         <div className="top-select-info">
                             <button
