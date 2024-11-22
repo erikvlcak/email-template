@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
 import EmailList from "../components/EmailList";
-import "../../css/style.scss";
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -143,10 +142,9 @@ const Dashboard = () => {
 
             <div className="main-content">
                 <div className="fixed-top">
-                    <Search
-                        handleEmailClick={handleEmailClick}
-                        displayedEmails={displayedEmails}
-                    />
+
+                    <Search handleEmailClick={handleEmailClick} displayedEmails={displayedEmails} selectedFolder={selectedFolder}/>
+
                     <div className="top-options">
                         <div className="top-select-info">
                             <button

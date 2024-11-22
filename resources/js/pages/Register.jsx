@@ -4,11 +4,34 @@ import axios from "axios";
 
 import UserContext from "../context/UserContext";
 
+const images = [
+    '/bgrImg/image-1.jpg',
+    '/bgrImg/image-2.jpg',
+    '/bgrImg/image-3.jpg',
+    '/bgrImg/image-4.jpg',
+    '/bgrImg/image-5.jpg',
+    '/bgrImg/image-6.jpg',
+    '/bgrImg/image-7.jpg',
+    '/bgrImg/image-8.jpg',
+    '/bgrImg/image-9.jpg',
+    '/bgrImg/image-10.jpg',
+    '/bgrImg/image-11.jpg',
+    '/bgrImg/image-12.jpg',
+    '/bgrImg/image-13.jpg',
+    '/bgrImg/image-14.jpg',
+    '/bgrImg/image-15.jpg',
+    '/bgrImg/image-16.jpg',
+    '/bgrImg/image-17.jpg',
+    '/bgrImg/image-18.jpg',
+    '/bgrImg/image-19.jpg',
+    '/bgrImg/image-20.jpg',
+];
+
 export default function Register(props) {
     const { getUser } = useContext(UserContext);
 
     const [backgroundImg, setBackgroundImg] = useState(0);
-    const [imageFiles, setImagesFiles] = useState([]);
+    const [errors, setErrors] = useState(null);
 
     const [values, setValues] = useState({
         email: "",
@@ -43,6 +66,7 @@ export default function Register(props) {
                         "VALIDATION FAILED:",
                         error.response.data.errors
                     );
+                    setErrors(error.response.data.errors)
                     break;
                 case 500:
                     console.log("UNKNOWN ERROR", error.response.data);
@@ -61,28 +85,18 @@ export default function Register(props) {
     };
 
     useEffect(() => {
-        const images = [];
-        for (let index = 1; index < 21; index++) {
-            images.push(`../bgrImg/image-${index}.jpg`);
-        }
-        setImagesFiles(images);
+        const interval = setInterval(() => {
+            setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
     }, []); 
-    
-    useEffect(() => {
-        if (imageFiles.length > 0) {
-            const interval = setInterval(() => {
-                setBackgroundImg((prevIndex) => (prevIndex + 1) % imageFiles.length);
-            }, 5000);
-    
-            return () => clearInterval(interval);
-        }
-    }, [imageFiles]); 
     
 
     return (
         <div className="auth-body"
         style={{
-            backgroundImage: `url(${imageFiles[backgroundImg]})`,
+            backgroundImage: `url(${images[backgroundImg]})`,
         }}
         >
             <div className="auth-wrapper">
@@ -100,7 +114,7 @@ export default function Register(props) {
                     onSubmit={handleSubmit}
                 >
                     {/* <label htmlFor="firstname">First Name: </label> */}
-
+                    <div className="auth-error">{errors?.firstname}</div>
                     <input
                         type="text"
                         name="firstname"
@@ -110,7 +124,7 @@ export default function Register(props) {
                     />
 
                     {/* <label htmlFor="lastname">Last Name: </label> */}
-
+                    <div className="auth-error">{errors?.lastname}</div>
                     <input
                         type="text"
                         name="lastname"
@@ -121,6 +135,7 @@ export default function Register(props) {
 
                     {/* <label htmlFor="email">Email: </label> */}
 
+                    <div className="auth-error">{errors?.email}</div>
                     <input
                         type="email"
                         name="email"
@@ -130,7 +145,7 @@ export default function Register(props) {
                     />
 
                     {/* <label htmlFor="phone">Phone: </label> */}
-
+                    <div className="auth-error">{errors?.phone}</div>
                     <input
                         type="text"
                         name="phone"
@@ -140,7 +155,7 @@ export default function Register(props) {
                     />
 
                     {/* <label htmlFor="password">Password: </label> */}
-
+                    <div className="auth-error">{errors?.password}</div>
                     <input
                         type="password"
                         name="password"
@@ -150,7 +165,7 @@ export default function Register(props) {
                     />
 
                     {/* <label htmlFor="password_confirmation">Password confirmation: </label> */}
-
+                    <div className="auth-error">{errors?.password_confirmation}</div>
                     <input
                         type="password"
                         name="password_confirmation"
@@ -161,7 +176,7 @@ export default function Register(props) {
 
                     <button>Register</button>
                 </form>
-
+                
                 <div className="auth-link">
                     <p>Already Have an Account?</p>
                     <p>
