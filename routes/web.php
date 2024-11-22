@@ -20,3 +20,4 @@ Route::view('/login', 'index')->name('login');
 Route::view('/{path?}', 'index')->where('path', '^((?!admin).)*$');
 
 Route::put('/api/emails/{id}', [MailController::class, 'updateEmail']);
+Route::delete('/api/emails/{id}', [MailController::class, 'deleteEmail']);

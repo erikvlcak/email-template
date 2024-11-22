@@ -3,6 +3,7 @@ import UserContext from "../context/UserContext";
 import { useContext } from "react";
 
 export default function EmailList({
+    emails,
     loading,
     displayedEmails,
     selectedEmails,
@@ -12,13 +13,12 @@ export default function EmailList({
     toggleStarred,
     formatDate,
 }) {
-
     return (
         <>
             {loading ? (
                 <div>Loading emails...</div>
             ) : (
-                displayedEmails.map((email) => (
+                displayedEmails.map((email, index) => (
                     <li
                         onClick={(e) => {
                             if (
@@ -45,13 +45,17 @@ export default function EmailList({
                         >
                             ★
                         </div>
-                        {selectedFolder !== 1 &&
-                            email.recipients.length > 0 && (
-                                <div className="email-recipient">
-                                    {email.recipients[0].receiver_email ||
-                                        "Unknown Recipient"}
-                                </div>
-                            )}
+
+                        {email.recipients.length > 0 && (
+                            <div className="email-recipient">
+                                {selectedFolder === 1 && "From: "}
+                                {selectedFolder === 2 && "To: "}
+                                {selectedFolder === 2
+                                    ? email.recipients[0].receiver_email
+                                    : emails[index]?.user?.email}
+                            </div>
+                        )}
+
                         <div className="email-subjectAndBody">
                             <span className="email-subject">
                                 {email.subject}
