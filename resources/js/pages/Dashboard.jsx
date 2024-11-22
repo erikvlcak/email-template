@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Editor from "../components/Editor";
 import EmailList from "../components/EmailList";
@@ -7,8 +7,10 @@ import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import EmailView from "../components/EmailView";
+import UserContext from "../context/UserContext";
 
 const Dashboard = () => {
+    const { user } = useContext(UserContext);
     const [emails, setEmails] = useState([]);
     const [selectedEmail, setSelectedEmail] = useState(null);
     const [isEditorVisible, setIsEditorVisible] = useState(false);
@@ -103,7 +105,7 @@ const Dashboard = () => {
     };
 
     const displayedEmails = emails.filter(
-        (email) => email.user && email.recipients.length > 0
+        (email) => email.user.email == user?.email
     );
 
     return (

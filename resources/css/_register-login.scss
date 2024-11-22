@@ -30,7 +30,7 @@ body{
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        width: 50%; 
+        width: 60%; 
     }
 
     .auth-link-button{
@@ -73,6 +73,8 @@ body{
         width: 80%;
         border: 1px solid lightcoral;
         border-radius: 10px;
+        width: 95%;
+        padding: 1rem;
         placeholder{
             color: #04AA6D;
         }
