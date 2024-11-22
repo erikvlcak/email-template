@@ -1,4 +1,4 @@
-.development {
+.profile-component {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -10,13 +10,14 @@
     position: absolute;
     box-shadow: 1px 1px 5px;
     top: 1rem;
-    right: 1rem;
+    right: 0;
     .profile-details {
         // margin-bottom: 10rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        cursor: default;
 
         .profile-pfp {
             border-radius: 50%;
@@ -26,7 +27,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3rem;
+            font-size: 3.5rem;
 
             .pfp-letter {
                 color: coral;
@@ -40,13 +41,14 @@
         justify-content: center;
         align-items: center;
 
-        button {
+        .profile-button {
             height: 3rem;
             width: 80%;
             border: 1px solid lightcoral;
             border-radius: 10px;
             background-color: white;
             margin: 1rem 1rem 1rem 1rem;
+            cursor: pointer;
 
             &:hover {
                 background-color: lightcoral;
@@ -54,4 +56,16 @@
             }
         }
     }
+
+    .close-icon{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 1.5rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        //border: 1px solid black;
+    }
 }
+
+

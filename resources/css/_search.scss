@@ -26,6 +26,12 @@
 .search-input {
     width: 95%;
     padding: 1rem;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.search-input-open {
+    width: 95%;
+    padding: 1rem;
     border-radius: 15px 15px 0px 0px;
 }
 
@@ -100,4 +106,25 @@
     
     
     
+}
+
+.profile-pfp-icon {
+    border-radius: 50%;
+    background-color: lightgreen;
+    height: 3.5rem;
+    width: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 1rem;
+    cursor: pointer;
+
+
+    .pfp-letter-icon {
+        color: coral;
+    }
 }

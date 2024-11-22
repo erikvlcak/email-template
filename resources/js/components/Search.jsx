@@ -1,31 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Profile from "./Profile";
+import UserContext from "../context/UserContext";
 
-export default function Search({handleEmailClick, displayedEmails}) {
+export default function Search({handleEmailClick, displayedEmails, selectedFolder}) {
+    const { user } = useContext(UserContext);
     const [query, setQuery] = useState("");
     const [mails, setMails] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [error, setError] = useState(null);
+    const [profileButton , setProfileButton] = useState(false)
 
-
-    const loadMails = async () => {
-        try {
-            const response = await axios.get("/api/emails");
-            setMails(response.data);
-        } catch (err) {
-            console.error("Failed to fetch emails:", err);
-            setError("Failed to fetch emails. Please try again later.");
+    const handleProfileButton = () =>{
+        if(profileButton == false){
+            setProfileButton(true)
+        }else{
+            setProfileButton(false)
         }
-    };
+    }
 
-
+    const handleSelectedFolder = () =>{
+        if(selectedFolder == 1){
+            return("Search in Inbox")
+        }else if(selectedFolder == 2){
+            return("Search in Sent")
+        }else if(selectedFolder == 3){
+            return("Search in All")
+        }else if(selectedFolder == 4){
+            return("Search in Drafts")
+        }else{
+            return("Search in Starred")
+        }
+    }
     
     useEffect(() => {
         const timer = setTimeout(() => {
             if (query.trim()) {
                 setFiltered(
-                    mails.filter((mail) =>
+                    displayedEmails.filter((mail) =>
                         mail.subject.toLowerCase().includes(query.toLowerCase())
                     )
                 );
@@ -37,17 +49,32 @@ export default function Search({handleEmailClick, displayedEmails}) {
         return () => clearTimeout(timer); 
     }, [query, mails]);
 
-    useEffect(() => {
-        loadMails();
-    }, []);
+
 
     return (
         <div className="page-top">
+
+            <div className="profile">
+                {profileButton ? 
+                
+                <div className="profile-open"><Profile handleProfileButton={handleProfileButton}/></div> : 
+
+                <div className="open-profile" onClick={()=>{handleProfileButton()}}>
+                    
+                    <div className="profile-pfp-icon">
+                        <div className="pfp-letter-icon">
+                            {user?.firstname?.slice(0, 1).toUpperCase()}
+                        </div>
+                    </div>    
+                    
+                </div>}
+            </div>
+
             <div className="searchBarComponent">
                 <div className="searchBar">
-                    <input className="search-input"
+                    <input className={query ? "search-input-open" : "search-input"}
                         type="text"
-                        placeholder="Search"
+                        placeholder= {handleSelectedFolder()}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />

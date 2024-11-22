@@ -4,17 +4,40 @@ import axios from "axios";
 
 import UserContext from "../context/UserContext";
 
+const images = [
+    '/bgrImg/image-1.jpg',
+    '/bgrImg/image-2.jpg',
+    '/bgrImg/image-3.jpg',
+    '/bgrImg/image-4.jpg',
+    '/bgrImg/image-5.jpg',
+    '/bgrImg/image-6.jpg',
+    '/bgrImg/image-7.jpg',
+    '/bgrImg/image-8.jpg',
+    '/bgrImg/image-9.jpg',
+    '/bgrImg/image-10.jpg',
+    '/bgrImg/image-11.jpg',
+    '/bgrImg/image-12.jpg',
+    '/bgrImg/image-13.jpg',
+    '/bgrImg/image-14.jpg',
+    '/bgrImg/image-15.jpg',
+    '/bgrImg/image-16.jpg',
+    '/bgrImg/image-17.jpg',
+    '/bgrImg/image-18.jpg',
+    '/bgrImg/image-19.jpg',
+    '/bgrImg/image-20.jpg',
+];
+
 export default function Login(props) {
     const { getUser } = useContext(UserContext);
-    const navigate = useNavigate();
 
     const [backgroundImg, setBackgroundImg] = useState(0);
-    const [imageFiles, setImagesFiles] = useState([]);
+    const [errors, setErrors] = useState(null);
     const [values, setValues] = useState({
         email: "",
         password: "",
     });
 
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,6 +61,7 @@ export default function Login(props) {
                         "VALIDATION FAILED:",
                         error.response.data.errors
                     );
+                    setErrors(error.response.data.errors)
                     break;
                 case 500:
                     console.log("UNKNOWN ERROR", error.response.data);
@@ -56,27 +80,17 @@ export default function Login(props) {
     };
 
     useEffect(() => {
-        const images = [];
-        for (let index = 1; index < 21; index++) {
-            images.push(`../bgrImg/image-${index}.jpg`);
-        }
-        setImagesFiles(images);
+        const interval = setInterval(() => {
+            setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
     }, []); 
-    
-    useEffect(() => {
-        if (imageFiles.length > 0) {
-            const interval = setInterval(() => {
-                setBackgroundImg((prevIndex) => (prevIndex + 1) % imageFiles.length);
-            }, 5000);
-    
-            return () => clearInterval(interval);
-        }
-    }, [imageFiles]); 
 
     return (
         <div className="auth-body"
         style={{
-            backgroundImage: `url(${imageFiles[backgroundImg]})`,
+            backgroundImage: `url(${images[backgroundImg]})`,
         }}
         >
             <div className="auth-wrapper">
@@ -93,6 +107,7 @@ export default function Login(props) {
                     method="post"
                     onSubmit={handleSubmit}
                 >
+                    <div className="auth-error">{errors?.email}</div>
                     <input
                         type="email"
                         name="email"
@@ -100,7 +115,7 @@ export default function Login(props) {
                         value={values.email}
                         onChange={handleChange}
                     />
-
+                    <div className="auth-error">{errors?.password}</div>
                     <input
                         type="password"
                         name="password"

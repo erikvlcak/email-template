@@ -48,13 +48,13 @@ body{
     align-items: center;
     display: flex;
     height: 92.5vh;
-    background-color: rgb(238, 238, 238);
+    background-color: transparent;
     margin: 0;
     padding: 2rem;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    transition: background-image 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 .auth-body.fade {
@@ -95,5 +95,16 @@ body{
         
     }
 
+
+}
+
+.auth-error{
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    margin: -0.5rem;
 
 }
