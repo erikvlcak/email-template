@@ -10,6 +10,7 @@ use App\Models\Recipient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class MailController extends Controller
 {
@@ -72,9 +73,10 @@ class MailController extends Controller
         $htmlBody = $data['body-html'] ?? null;
         $recipientEmail = $data['recipient'];
 
+        $randomUserId = User::inRandomOrder()->first()->id;
         // Save the received email into the database
         $email = Email::create([
-            'sender_id' => Auth::id() ?? 1, // Assuming the sender is a user with ID 1
+            'sender_id' => $randomUserId, // Assuming the sender is a user with ID 1 MAKE IT RANDOM FROM THE LIST OF USERS
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
             'folder_id' => 1, // Set folder_id to 1 for received emails
             'subject' => $subject,
@@ -130,5 +132,12 @@ class MailController extends Controller
         $email = Email::findOrFail($id);
         $email->update($request->all());
         return response()->json(['message' => 'Email updated successfully!']);
+    }
+
+    public function deleteEmail($id)
+    {
+        $email = Email::findOrFail($id);
+        $email->delete();
+        return response()->json(['message' => 'Email deleted successfully!']);
     }
 }
