@@ -122,9 +122,9 @@ console.log(emails);
         //item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email
 
         selectedFolder == 1 ? 
-        (item?.recipients[0]?.receiver_email == user?.email) :
-        (selectedFolder == 2 ? (item.user.id == user?.id) :
-         (selectedFolder == 3 ? item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email :
+        ((item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)) :
+        (selectedFolder == 2 ? ((item.user.id == user?.id)&&(item.folder_id != 5)) :
+         (selectedFolder == 3 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)) :
             (selectedFolder == 4 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 4)) : 
                 (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 5)) : 
                     (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.is_starred == 1)):
