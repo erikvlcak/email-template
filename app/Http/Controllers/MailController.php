@@ -30,7 +30,7 @@ class MailController extends Controller
         $plainTextContent = strip_tags($emailContent);
 
         // Send the email using Mailgun
-        Mail::to($recipientEmail)->send(new SendMail($recipientEmail, $emailSubject, $emailContent));
+        //Mail::to($recipientEmail)->send(new SendMail($recipientEmail, $emailSubject, $emailContent));
 
         // Save the sent email into the database
         $email = Email::create([
@@ -73,10 +73,10 @@ class MailController extends Controller
         $htmlBody = $data['body-html'] ?? null;
         $recipientEmail = $data['recipient'];
 
-        $randomUserId = User::inRandomOrder()->first()->id;
+        //$randomUserId = User::inRandomOrder()->first()->id;
         // Save the received email into the database
         $email = Email::create([
-            'sender_id' => $randomUserId, // Assuming the sender is a user with ID 1 MAKE IT RANDOM FROM THE LIST OF USERS
+            'sender_id' => Auth::id(), // Assuming the sender is a user with ID 1 MAKE IT RANDOM FROM THE LIST OF USERS
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
             'folder_id' => 1, // Set folder_id to 1 for received emails
             'subject' => $subject,

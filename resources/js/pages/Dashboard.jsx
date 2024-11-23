@@ -31,7 +31,7 @@ const Dashboard = () => {
             } else if (folderId === 3) {
                 response = await axios.get("/api/emails");
             } else {
-                response = await axios.get(`/api/emails?folder_id=${folderId}`);
+                response = await axios.get(`/api/emails`);
             }
             setEmails(response.data);
             console.log("Emails:", emails);
@@ -117,18 +117,18 @@ const Dashboard = () => {
             console.error("Error deleting emails:", error);
         }
     };
-
+console.log(emails);
     const displayedEmails = emails.filter((item) =>
-        // item.user.email === user?.email ||
-        // item.user.email ===
-        //     "sandboxa0ac285d67634ae6aa635e7b76c21c6b.mailgun.org" ||
-        item.recipients.some(
-            (recipient) =>
-                recipient.receiver_email === "erikvlcak1@gmail.com" ||
-                recipient.receiver_email === "vasulhavruliv1.c@gmail.com" ||
-                recipient.receiver_email ===
-                    "test@sandboxa0ac285d67634ae6aa635e7b76c21c6b.mailgun.org"
-        )
+        //item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email
+
+        selectedFolder == 1 ? 
+        (item?.recipients[0]?.receiver_email == user?.email) :
+        (selectedFolder == 2 ? (item.user.id == user?.id) :
+         (selectedFolder == 3 ? item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email :
+            (selectedFolder == 4 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 4)) : 
+                (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 5)) : 
+                    (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.is_starred == 1)):
+                    (null))))))
     );
 
     return (
