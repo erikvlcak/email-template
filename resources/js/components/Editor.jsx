@@ -8,10 +8,11 @@ const Editor = ({
     onClose,
     initialEmail = "",
     initialSubject = "",
+    initialContent = ""
 }) => {
     const [email, setEmail] = useState(initialEmail);
     const [subject, setSubject] = useState(initialSubject);
-    const [content, setContent] = useState("");
+    const [content, setContent] = useState(initialContent);
     const [status, setStatus] = useState("");
     const [folderId, setFolderId] = useState(null);
 
@@ -48,7 +49,7 @@ const Editor = ({
 
             <form onSubmit={handleSubmit} className="editor-content">
                 <input
-                    type="email"
+                    type="text"
                     className="editor__input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

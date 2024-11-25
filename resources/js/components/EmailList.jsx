@@ -19,7 +19,7 @@ export default function EmailList({
                 <div>Loading emails...</div>
             ) : (
                 displayedEmails.map((email, index) => (
-                    <li
+                    <li 
                         onClick={(e) => {
                             if (
                                 e.target.type !== "checkbox" &&

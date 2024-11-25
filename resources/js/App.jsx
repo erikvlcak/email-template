@@ -12,7 +12,7 @@ import UserContext from "./context/UserContext";
 
 function App() {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
 
     const getUser = async () => {
         try {
