@@ -119,16 +119,16 @@ const Dashboard = () => {
     };
 console.log(emails);
     const displayedEmails = emails.filter((item) =>
-        //item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email
 
         selectedFolder == 1 ? 
-        ((item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)) :
-        (selectedFolder == 2 ? ((item.user.id == user?.id)&&(item.folder_id != 5)) :
-         (selectedFolder == 3 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)) :
+        ((item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)&& (item?.recipients[0]?.receiver_email != null)) :
+        (selectedFolder == 2 ? ((item.user.id == user?.id)&&(item.folder_id != 5) && (item?.recipients[0]?.receiver_email != null) && (item.folder_id != 4)) :
+         (selectedFolder == 3 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)&& (item?.recipients[0]?.receiver_email != null)) :
             (selectedFolder == 4 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 4)) : 
-                (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 5)) : 
-                    (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.is_starred == 1)):
+                (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 5)&&(item?.recipients[0]?.receiver_email != null)) : 
+                    (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.is_starred == 1)&& (item?.recipients[0]?.receiver_email != null)):
                     (null))))))
+                    
     );
 
     return (

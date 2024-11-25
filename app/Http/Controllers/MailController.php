@@ -25,6 +25,7 @@ class MailController extends Controller
         $recipientEmail = $request->input('address');
         $emailSubject = $request->input('subject');
         $emailContent = $request->input('text');
+        $emailFolder = $request->input('folder_id');
 
         // Extract plain text from HTML content
         $plainTextContent = strip_tags($emailContent);
@@ -36,7 +37,7 @@ class MailController extends Controller
         $email = Email::create([
             'sender_id' => Auth::id() ?? 1, // Assuming the sender is a user with ID 1
             // 'sender_id' => auth()->id(), // Uncomment this line if the sender is the authenticated user
-            'folder_id' => 2, // Set folder_id to 2 for sent emails
+            'folder_id' => $emailFolder, // Set folder_id to 2 for sent emails
             'subject' => $emailSubject,
             'body' => $plainTextContent,
             'html' => $emailContent,

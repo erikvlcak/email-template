@@ -13,6 +13,7 @@ const Editor = ({
     const [subject, setSubject] = useState(initialSubject);
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
+    const [folderId, setFolderId] = useState(null);
 
     useEffect(() => {
         setEmail(initialEmail);
@@ -26,6 +27,7 @@ const Editor = ({
                 address: email,
                 subject,
                 text: content,
+                folder_id: folderId,
             });
             setStatus("Email sent successfully!");
             onEmailSent(); // Refresh the email list in Dashboard
@@ -65,8 +67,8 @@ const Editor = ({
                         }}
                     />
                 </div>
-                <button type="submit">Send</button>
-                <button>Save to drafts</button>
+                <button type="submit" onClick={()=>{setFolderId(2)}}>Send</button>
+                <button onClick={()=>{setFolderId(4)}}>Save to drafts</button>
             </form>
             {status && <p>{status}</p>}
         </div>

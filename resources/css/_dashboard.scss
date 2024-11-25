@@ -64,6 +64,8 @@ input[type="checkbox"] {
     background-color: white; /* Set the background color */
     border: 2px solid black; /* Set the border color */
     position: relative;
+    padding-right: 17px;
+    
 }
 
 input[type="checkbox"]:checked {
@@ -286,18 +288,18 @@ input[type="checkbox"]:checked::after {
     color: rgb(255, 255, 255);
     border: none;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    font-size: 50px;
+    width: 70px;
+    height: 70px;
+    font-size: 40px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.65s ease-in-out;
 }
 
 .compose-button:hover {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
 }
 
 .editor-window {
@@ -333,4 +335,9 @@ input[type="checkbox"]:checked::after {
 
 .editor-content .ck-editor__editable {
     flex: 1;
+}
+
+.email-date{
+
+    
 }

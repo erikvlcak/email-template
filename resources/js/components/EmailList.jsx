@@ -62,7 +62,7 @@ export default function EmailList({
                             </span>{" "}
                             - {email.body}
                         </div>
-                        <div>{formatDate(email.created_at)}</div>
+                        <div className="email-date">{formatDate(email.created_at)}</div>
                     </li>
                 ))
             )}
