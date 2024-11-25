@@ -39,12 +39,17 @@ const Editor = ({
 
     return (
         <div className="editor-window">
-            <button className="close-button" onClick={onClose}>
-                X
-            </button>
+            <div>
+                <h2>New Message</h2>
+                <div className="close-button" onClick={onClose}>
+                    X
+                </div>
+            </div>
+
             <form onSubmit={handleSubmit} className="editor-content">
                 <input
                     type="email"
+                    className="editor__input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -52,6 +57,7 @@ const Editor = ({
                 />
                 <input
                     type="text"
+                    className="editor__input"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                     required
@@ -60,6 +66,7 @@ const Editor = ({
                 <div className="editor-content">
                     <CKEditor
                         editor={ClassicEditor}
+                        className="editor-textfield"
                         data={content}
                         onChange={(event, editor) => {
                             const data = editor.getData();
@@ -67,9 +74,12 @@ const Editor = ({
                         }}
                     />
                 </div>
+
                 <button type="submit" onClick={()=>{setFolderId(2)}}>Send</button>
                 <button onClick={()=>{setFolderId(4)}}>Save to drafts</button>
+
             </form>
+       
             {status && <p>{status}</p>}
         </div>
     );
