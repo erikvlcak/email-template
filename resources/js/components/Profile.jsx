@@ -5,7 +5,7 @@ import UserContext from "../context/UserContext";
 
 import Logout from "./Logout";
 
-function Profile({handleProfileButton}) {
+function Profile({ handleProfileButton }) {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
 
@@ -20,7 +20,14 @@ function Profile({handleProfileButton}) {
 
     return (
         <div className="profile-component">
-            <div className="close-icon" onClick={()=>{handleProfileButton()}}>&#x2715;</div>
+            <div
+                className="close-icon"
+                onClick={() => {
+                    handleProfileButton();
+                }}
+            >
+                &#x2715;
+            </div>
             <div className="profile-details">
                 <p className="profile-mail">{user?.email}</p>
                 <div className="profile-pfp">
@@ -34,11 +41,16 @@ function Profile({handleProfileButton}) {
             <div className="profile-functionality">
                 <button
                     onClick={() => handleLogout("/register")}
-                    className="profile-button"
+                    className="profile-button switch"
                 >
-                    Add different account
+                    Switch accounts
                 </button>
-                <button className="profile-button" onClick={() => handleLogout("/login")}>Logout</button>
+                <button
+                    className="profile-button logout"
+                    onClick={() => handleLogout("/login")}
+                >
+                    Logout
+                </button>
             </div>
         </div>
     );
