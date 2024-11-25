@@ -17,6 +17,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [selectedEmails, setSelectedEmails] = useState([]);
     const [activeButton, setActiveButton] = useState(1); // Default to Inbox
+    //const [isRead, setIsRead] = useState(false);
 
     const navigate = useNavigate();
 
@@ -40,6 +41,20 @@ const Dashboard = () => {
         }
     };
 
+    const markEmailAsRead = async (emailId) => {
+        try {
+            await axios.patch(`/api/emails/${emailId}/mark-as-read`, {
+                is_read: true, // Mark the email as read
+            });
+            console.log("Email marked as read");
+        } catch (error) {
+            console.error("Error marking email as read:", error);
+        }
+    };
+    
+
+    
+
     const toggleEditor = () => {
         setIsEditorVisible(!isEditorVisible);
     };
@@ -53,6 +68,7 @@ const Dashboard = () => {
 
     const handleEmailClick = (email) => {
         setSelectedEmail(email);
+        markEmailAsRead(email.id);
     };
 
     const formatDate = (dateString) => {
