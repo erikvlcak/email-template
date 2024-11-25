@@ -16,7 +16,9 @@ export default function EmailList({
     return (
         <>
             {loading ? (
-                <div>Loading emails...</div>
+                <div className="loading-circle">
+                    <div className="spinner"></div>
+                </div>
             ) : (
                 displayedEmails.map((email, index) => (
                     <li className={email.recipients[0].is_read == 0 ? ("email-item-open") : ("email-item") }
