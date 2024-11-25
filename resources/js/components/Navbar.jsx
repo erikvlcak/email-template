@@ -6,14 +6,19 @@ export default function Navbar({
 }) {
     return (
         <div className="sidebar">
-            <h2 className="logo-cbp" onClick={() => handleFolderClick(1)}>CBP Mail</h2>
+            <h2 className="logo-cbp" onClick={() => handleFolderClick(1)}>
+                {" "}
+                <span className="title-blue">C</span>
+                <span className="title-black">B</span>
+                <span className="title-red">P</span> MAIL
+            </h2>
 
-            <button
+            {/* <button
                 className="refresh-button"
                 onClick={() => fetchEmails(selectedFolder)}
             >
                 Refresh inbox
-            </button>
+            </button> */}
 
             <ul className="navigation">
                 <button
