@@ -4,21 +4,21 @@
     justify-content: center;
     flex-direction: column;
     background-color: #f1f1f1;
-    border-radius: 2rem;
-    min-width: 20rem;
-    padding: 2rem;
+    border-radius: 15px;
+
+    padding: 1rem 2rem;
+
     position: absolute;
     box-shadow: 1px 1px 5px;
     top: 1rem;
     right: 0;
     .profile-details {
-        // margin-bottom: 10rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: default;
-
+        height: fit-content;
         .profile-pfp {
             border-radius: 50%;
             background-color: $blue;
@@ -29,11 +29,8 @@
             align-items: center;
             font-size: 5rem;
             font-weight: 800;
-            border: 5px solid $black;
-
-            .pfp-letter {
-                color: $red;
-            }
+            border: 2px solid $black;
+            color: $red;
         }
     }
 
@@ -42,18 +39,22 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 1rem;
+        height: fit-content;
+        width: fit-content;
 
         .profile-button {
-            height: 3rem;
-            width: 80%;
-            border: 1px solid lightcoral;
-            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            width: 100%;
+            border-radius: 15px;
+            border: 1px solid $black;
+            border-width: 2px;
             background-color: white;
-            margin: 1rem 1rem 1rem 1rem;
+
             cursor: pointer;
 
             &:hover {
-                background-color: lightcoral;
+                background-color: $blue;
                 color: white;
             }
         }
@@ -62,10 +63,17 @@
     .close-icon {
         position: absolute;
         top: 0;
-        right: 0;
-        margin: 1.5rem;
+        right: 5px;
+
         font-size: 1.5rem;
         cursor: pointer;
         //border: 1px solid black;
     }
 }
+
+// .profile-button .logout {
+//     &:hover {
+//         background-color: $red;
+//         color: white;
+//     }
+// }

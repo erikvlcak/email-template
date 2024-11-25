@@ -76,11 +76,27 @@ const Editor = ({
                     />
                 </div>
 
-                <button type="submit" onClick={()=>{setFolderId(2)}}>Send</button>
-                <button onClick={()=>{setFolderId(4)}}>Save to drafts</button>
-
+                <div className="editor-buttons">
+                    <button
+                        className="send"
+                        type="submit"
+                        onClick={() => {
+                            setFolderId(2);
+                        }}
+                    >
+                        Send message
+                    </button>
+                    <button
+                        className="draft"
+                        onClick={() => {
+                            setFolderId(4);
+                        }}
+                    >
+                        Save to drafts
+                    </button>
+                </div>
             </form>
-       
+
             {status && <p>{status}</p>}
         </div>
     );
