@@ -51,7 +51,6 @@ button {
     line-height: 1.6;
     word-break: break-word;
     height: 500px;
-    background-color: red;
 }
 
 // .ck-content > p {
@@ -135,4 +134,5 @@ button {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 11rem;
 }

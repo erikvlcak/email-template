@@ -77,7 +77,7 @@ export default function Search({
             </div>
 
             <input
-                className="search-input"
+                className={query ? "search-input-active" : "search-input"}
                 type="text"
                 placeholder={handleSelectedFolder()}
                 value={query}

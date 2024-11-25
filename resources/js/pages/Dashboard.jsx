@@ -117,18 +117,37 @@ const Dashboard = () => {
             console.error("Error deleting emails:", error);
         }
     };
-console.log(emails);
+    console.log(emails);
     const displayedEmails = emails.filter((item) =>
-
-        selectedFolder == 1 ? 
-        ((item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)&& (item?.recipients[0]?.receiver_email != null)) :
-        (selectedFolder == 2 ? ((item.user.id == user?.id)&&(item.folder_id != 5) && (item?.recipients[0]?.receiver_email != null) && (item.folder_id != 4)) :
-         (selectedFolder == 3 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)&& (item?.recipients[0]?.receiver_email != null)) :
-            (selectedFolder == 4 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 4)) : 
-                (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 5)&&(item?.recipients[0]?.receiver_email != null)) : 
-                    (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.is_starred == 1)&& (item?.recipients[0]?.receiver_email != null)):
-                    (null))))))
-                    
+        selectedFolder == 1
+            ? item?.recipients[0]?.receiver_email == user?.email &&
+              item.folder_id != 5 &&
+              item?.recipients[0]?.receiver_email != null
+            : selectedFolder == 2
+            ? item.user.id == user?.id &&
+              item.folder_id != 5 &&
+              item?.recipients[0]?.receiver_email != null &&
+              item.folder_id != 4
+            : selectedFolder == 3
+            ? (item.user.id == user?.id ||
+                  item?.recipients[0]?.receiver_email == user?.email) &&
+              item.folder_id != 5 &&
+              item?.recipients[0]?.receiver_email != null
+            : selectedFolder == 4
+            ? (item.user.id == user?.id ||
+                  item?.recipients[0]?.receiver_email == user?.email) &&
+              item.folder_id == 4
+            : selectedFolder == 5
+            ? (item.user.id == user?.id ||
+                  item?.recipients[0]?.receiver_email == user?.email) &&
+              item.folder_id == 5 &&
+              item?.recipients[0]?.receiver_email != null
+            : selectedFolder == "starred"
+            ? (item.user.id == user?.id ||
+                  item?.recipients[0]?.receiver_email == user?.email) &&
+              item.is_starred == 1 &&
+              item?.recipients[0]?.receiver_email != null
+            : null
     );
 
     return (
@@ -142,8 +161,11 @@ console.log(emails);
 
             <div className="main-content">
                 <div className="fixed-top">
-
-                    <Search handleEmailClick={handleEmailClick} displayedEmails={displayedEmails} selectedFolder={selectedFolder}/>
+                    <Search
+                        handleEmailClick={handleEmailClick}
+                        displayedEmails={displayedEmails}
+                        selectedFolder={selectedFolder}
+                    />
 
                     <div className="top-options">
                         <div className="top-select-info">
@@ -166,6 +188,7 @@ console.log(emails);
                                 <div className="top-move-buttons">
                                     {selectedFolder !== 5 && (
                                         <button
+                                            className="trash-button"
                                             onClick={() =>
                                                 moveEmailsToFolder(5)
                                             }

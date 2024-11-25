@@ -31,7 +31,7 @@ export default function Navbar({
                     className={activeButton === "starred" ? "active" : ""}
                     onClick={() => handleFolderClick("starred")}
                 >
-                    Starred
+                    Favorite
                 </button>
                 <button
                     className={activeButton === 2 ? "active" : ""}
