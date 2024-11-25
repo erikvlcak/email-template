@@ -146,4 +146,11 @@ class MailController extends Controller
         $email->delete();
         return response()->json(['message' => 'Email deleted successfully!']);
     }
+
+    public function markAsRead(Request $request, $id)
+    {
+        $isRead = Recipient::findOrFail($id);
+        $isRead->update(['is_read' => $request->input('is_read')]);
+        return response()->json(['message' => 'Email status updated successfully!']);
+    }
 }

@@ -266,6 +266,7 @@ input[type="checkbox"]:checked::after {
     gap: 1rem;
     width: 80vw;
     cursor: pointer;
+    background-color: rgb(233, 233, 233);
 }
 
 .email-item:hover {
@@ -361,4 +362,20 @@ input[type="checkbox"]:checked::after {
 
 .editor-content .ck-editor__editable {
     flex: 1;
+}
+
+.email-item-open{
+    display: flex;
+    color: $black;
+    justify-content: start;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px 10px;
+    border-bottom: 1px solid #ddd;
+    gap: 1rem;
+    width: 80vw;
+    cursor: pointer;
+    
 }
