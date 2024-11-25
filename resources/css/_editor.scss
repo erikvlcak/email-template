@@ -4,11 +4,33 @@
 //     outline: 1px solid red;
 // }
 
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-weight: 400;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .main-container {
     font-family: "Lato";
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+}
+
+.button-submit {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.button-submit:hover {
+    background-color: gold;
+    color: black;
 }
 
 .editor__input {
@@ -17,6 +39,7 @@
     width: 100%;
     padding: 1rem 0 0.5rem 0;
     margin-bottom: 0.5rem;
+    font-size: 1rem;
 }
 
 .editor__input:focus {
@@ -27,30 +50,31 @@
     font-family: "Lato";
     line-height: 1.6;
     word-break: break-word;
+    height: 500px;
 }
 
-.ck-content > p:nth-child(1) {
-    min-height: 200px;
-}
+// .ck-content > p {
+//     height: 5rem;
+// }
 
 .editor-container_classic-editor .editor-container__editor {
     min-width: 795px;
     max-width: 795px;
 }
 
-.compose-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-}
+// .compose-button {
+//     position: fixed;
+//     bottom: 20px;
+//     right: 20px;
+//     background-color: #007bff;
+//     color: white;
+//     border: none;
+//     border-radius: 50%;
+//     width: 50px;
+//     height: 50px;
+//     font-size: 24px;
+//     cursor: pointer;
+// }
 
 .editor-window {
     position: fixed;
@@ -65,22 +89,33 @@
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
 }
 
 .close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: none;
-    border: none;
-    font-size: 16px;
     cursor: pointer;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
 
 .editor-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    border: 0px;
 }
 
 .editor-content .ck-editor__editable_inline {
