@@ -13,47 +13,40 @@ export default function Navbar({
                 <span className="title-red">P</span> MAIL
             </h2>
 
-            {/* <button
-                className="refresh-button"
-                onClick={() => fetchEmails(selectedFolder)}
-            >
-                Refresh inbox
-            </button> */}
-
             <ul className="navigation">
                 <button
                     className={activeButton === 1 ? "active" : ""}
-                    onClick={() => handleFolderClick(1)}
+                    onClick={() => {handleFolderClick(1); fetchEmails(selectedFolder)}}
                 >
                     Inbox
                 </button>
                 <button
                     className={activeButton === "starred" ? "active" : ""}
-                    onClick={() => handleFolderClick("starred")}
+                    onClick={() => {handleFolderClick("starred"); fetchEmails(selectedFolder)}}
                 >
                     Starred
                 </button>
                 <button
                     className={activeButton === 2 ? "active" : ""}
-                    onClick={() => handleFolderClick(2)}
+                    onClick={() => {handleFolderClick(2); fetchEmails(selectedFolder)}}
                 >
                     Sent
                 </button>
                 <button
                     className={activeButton === 3 ? "active" : ""}
-                    onClick={() => handleFolderClick(3)}
+                    onClick={() => {handleFolderClick(3); fetchEmails(selectedFolder)}}
                 >
                     All
                 </button>
                 <button
                     className={activeButton === 4 ? "active" : ""}
-                    onClick={() => handleFolderClick(4)}
+                    onClick={() => {handleFolderClick(4); fetchEmails(selectedFolder)}}
                 >
                     Drafts
                 </button>
                 <button
                     className={activeButton === 5 ? "active" : ""}
-                    onClick={() => handleFolderClick(5)}
+                    onClick={() => {handleFolderClick(5); fetchEmails(selectedFolder)}}
                 >
                     Trash
                 </button>

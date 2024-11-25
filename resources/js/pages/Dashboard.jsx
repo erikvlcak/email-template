@@ -3,7 +3,7 @@ import axios from "axios";
 import Editor from "../components/Editor";
 import EmailList from "../components/EmailList";
 import Search from "../components/Search";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import EmailView from "../components/EmailView";
 import UserContext from "../context/UserContext";
@@ -17,10 +17,9 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [selectedEmails, setSelectedEmails] = useState([]);
     const [activeButton, setActiveButton] = useState(1); // Default to Inbox
+    //const [isRead, setIsRead] = useState(false);
 
-    useEffect(() => {
-        fetchEmails(selectedFolder);
-    }, [selectedFolder]);
+    const navigate = useNavigate();
 
     const fetchEmails = async (folderId) => {
         try {
@@ -42,6 +41,20 @@ const Dashboard = () => {
         }
     };
 
+    const markEmailAsRead = async (emailId) => {
+        try {
+            await axios.patch(`/api/emails/${emailId}/mark-as-read`, {
+                is_read: true, // Mark the email as read
+            });
+            console.log("Email marked as read");
+        } catch (error) {
+            console.error("Error marking email as read:", error);
+        }
+    };
+    
+
+    
+
     const toggleEditor = () => {
         setIsEditorVisible(!isEditorVisible);
     };
@@ -55,6 +68,7 @@ const Dashboard = () => {
 
     const handleEmailClick = (email) => {
         setSelectedEmail(email);
+        markEmailAsRead(email.id);
     };
 
     const formatDate = (dateString) => {
@@ -117,111 +131,138 @@ const Dashboard = () => {
             console.error("Error deleting emails:", error);
         }
     };
-console.log(emails);
+
     const displayedEmails = emails.filter((item) =>
 
         selectedFolder == 1 ? 
-        ((item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)&& (item?.recipients[0]?.receiver_email != null)) :
-        (selectedFolder == 2 ? ((item.user.id == user?.id)&&(item.folder_id != 5) && (item?.recipients[0]?.receiver_email != null) && (item.folder_id != 4)) :
-         (selectedFolder == 3 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5)&& (item?.recipients[0]?.receiver_email != null)) :
-            (selectedFolder == 4 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 4)) : 
-                (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id == 5)&&(item?.recipients[0]?.receiver_email != null)) : 
-                    (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email)&&(item.is_starred == 1)&& (item?.recipients[0]?.receiver_email != null)):
+        ((item?.recipients[0]?.receiver_email == user?.email)&&(item.folder_id != 5) && (item?.recipients[0]?.receiver_email != null)) :
+        (selectedFolder == 2 ? ((item.user.id == user?.id) && (item.folder_id != 5) && (item?.recipients[0]?.receiver_email != null) && (item.folder_id != 4)) :
+         (selectedFolder == 3 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email) && (item.folder_id != 5) && (item?.recipients[0]?.receiver_email != null)) :
+            (selectedFolder == 4 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email) && (item.folder_id == 4) && (item?.recipients[0]?.receiver_email != null)) : 
+                (selectedFolder == 5 ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email) && (item.folder_id == 5) && (item?.recipients[0]?.receiver_email != null)) : 
+                    (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email) && (item.is_starred == 1) && (item?.recipients[0]?.receiver_email != null)):
                     (null))))))
                     
     );
 
+
+    useEffect(() => {
+        fetchEmails(selectedFolder);
+    }, [selectedFolder]);
+
     return (
-        <div className="dashboard">
-            <Navbar
-                fetchEmails={fetchEmails}
-                handleFolderClick={handleFolderClick}
-                selectedFolder={selectedFolder}
-                activeButton={activeButton}
-            />
+        (user && Object.keys(user).length) ? (
+            <div className="dashboard">
+                <Navbar
+                    fetchEmails={fetchEmails}
+                    handleFolderClick={handleFolderClick}
+                    selectedFolder={selectedFolder}
+                    activeButton={activeButton}
+                />
 
-            <div className="main-content">
-                <div className="fixed-top">
+                <div className="main-content">
+                    <div className="fixed-top">
 
-                    <Search handleEmailClick={handleEmailClick} displayedEmails={displayedEmails} selectedFolder={selectedFolder}/>
+                        <Search handleEmailClick={handleEmailClick} displayedEmails={displayedEmails} selectedFolder={selectedFolder}/>
 
-                    <div className="top-options">
-                        <div className="top-select-info">
-                            <button
-                                onClick={() =>
-                                    handleSelectAllEmails(displayedEmails)
-                                }
-                            >
-                                Select all
-                            </button>
+                        <div className="top-options">
+                            <div className="top-select-info">
+                                <button
+                                    onClick={() =>
+                                        handleSelectAllEmails(displayedEmails)
+                                    }
+                                >
+                                    Select all
+                                </button>
 
-                            <div>
-                                <strong>{selectedEmails.length} </strong>
-                                selected
+                                <div>
+                                    <strong>{selectedEmails.length} </strong>
+                                    selected
+                                </div>
+                            </div>
+
+                            <div className="top-move">
+                                {selectedEmails.length > 0 && (
+                                    <div className="top-move-buttons">
+                                        {selectedFolder !== 5 && (
+                                            <button
+                                                onClick={() =>
+                                                    moveEmailsToFolder(5)
+                                                }
+                                            >
+                                                Move selected to Trash
+                                            </button>
+                                        )}
+                                        {selectedFolder == 5 && (
+                                            <div className="trash-buttons">
+                                            <button
+                                                className="button-delete"
+                                                onClick={
+                                                    () => deleteSelectedEmails() //delete emails
+                                                }
+                                            >
+                                                Delete selected
+                                            </button>
+
+                                            <button
+                                                className="button-delete"
+                                                onClick={
+                                                   () => moveEmailsToFolder(3)
+                                                    
+                                                }
+                                            >
+                                                Restore selected
+                                            </button>
+                                            </div>
+                                            
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
-
-                        <div className="top-move">
-                            {selectedEmails.length > 0 && (
-                                <div className="top-move-buttons">
-                                    {selectedFolder !== 5 && (
-                                        <button
-                                            onClick={() =>
-                                                moveEmailsToFolder(5)
-                                            }
-                                        >
-                                            Move selected to Trash
-                                        </button>
-                                    )}
-                                    {selectedFolder == 5 && (
-                                        <button
-                                            className="button-delete"
-                                            onClick={
-                                                () => deleteSelectedEmails() //delete emails
-                                            }
-                                        >
-                                            Delete selected
-                                        </button>
-                                    )}
-                                </div>
-                            )}
-                        </div>
                     </div>
-                </div>
-                {isEditorVisible && (
-                    <Editor
-                        onEmailSent={() => fetchEmails(selectedFolder)}
-                        onClose={toggleEditor}
-                    />
-                )}
-                <div className="compose-button" onClick={toggleEditor}>
-                    +
-                </div>
-
-                <div className="email-list">
-                    {selectedEmail ? (
-                        <EmailView
-                            selectedFolder={selectedFolder}
-                            selectedEmail={selectedEmail}
-                            setSelectedEmail={setSelectedEmail}
-                            formatDate={formatDate}
-                        />
-                    ) : (
-                        <EmailList
-                            emails={emails}
-                            loading={loading}
-                            displayedEmails={displayedEmails}
-                            selectedEmails={selectedEmails}
-                            selectedFolder={selectedFolder}
-                            handleEmailClick={handleEmailClick}
-                            handleSelectEmail={handleSelectEmail}
-                            toggleStarred={toggleStarred}
-                            formatDate={formatDate}
+                    {isEditorVisible && (
+                        <Editor
+                            onEmailSent={() => fetchEmails(selectedFolder)}
+                            onClose={toggleEditor}
                         />
                     )}
+                    <div className="compose-button" onClick={toggleEditor}>
+                        +
+                    </div>
+
+                    <div className="email-list">
+                        {selectedEmail ? (
+                            <EmailView
+                                selectedFolder={selectedFolder}
+                                selectedEmail={selectedEmail}
+                                setSelectedEmail={setSelectedEmail}
+                                formatDate={formatDate}
+                            />
+                        ) : (
+                            <EmailList
+                                emails={emails}
+                                loading={loading}
+                                displayedEmails={displayedEmails}
+                                selectedEmails={selectedEmails}
+                                selectedFolder={selectedFolder}
+                                handleEmailClick={handleEmailClick}
+                                handleSelectEmail={handleSelectEmail}
+                                toggleStarred={toggleStarred}
+                                formatDate={formatDate}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        ) : (
+            <>
+                <h1>Please log in to access this page</h1>
+                <Link to='/login'>
+                    Log in
+                </Link>
+            </>
+        )
     );
 };
 
