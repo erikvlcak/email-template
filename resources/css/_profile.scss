@@ -21,16 +21,18 @@
 
         .profile-pfp {
             border-radius: 50%;
-            background-color: lightgreen;
+            background-color: $blue;
             height: 7rem;
             width: 7rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3.5rem;
+            font-size: 5rem;
+            font-weight: 800;
+            border: 5px solid $black;
 
             .pfp-letter {
-                color: coral;
+                color: $red;
             }
         }
     }
@@ -57,7 +59,7 @@
         }
     }
 
-    .close-icon{
+    .close-icon {
         position: absolute;
         top: 0;
         right: 0;
@@ -67,5 +69,3 @@
         //border: 1px solid black;
     }
 }
-
-
