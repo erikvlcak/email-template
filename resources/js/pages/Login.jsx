@@ -5,26 +5,26 @@ import axios from "axios";
 import UserContext from "../context/UserContext";
 
 const images = [
-    '/bgrImg/image-1.jpg',
-    '/bgrImg/image-2.jpg',
-    '/bgrImg/image-3.jpg',
-    '/bgrImg/image-4.jpg',
-    '/bgrImg/image-5.jpg',
-    '/bgrImg/image-6.jpg',
-    '/bgrImg/image-7.jpg',
-    '/bgrImg/image-8.jpg',
-    '/bgrImg/image-9.jpg',
-    '/bgrImg/image-10.jpg',
-    '/bgrImg/image-11.jpg',
-    '/bgrImg/image-12.jpg',
-    '/bgrImg/image-13.jpg',
-    '/bgrImg/image-14.jpg',
-    '/bgrImg/image-15.jpg',
-    '/bgrImg/image-16.jpg',
-    '/bgrImg/image-17.jpg',
-    '/bgrImg/image-18.jpg',
-    '/bgrImg/image-19.jpg',
-    '/bgrImg/image-20.jpg',
+    "/bgrImg/image-1.jpg",
+    "/bgrImg/image-2.jpg",
+    "/bgrImg/image-3.jpg",
+    "/bgrImg/image-4.jpg",
+    "/bgrImg/image-5.jpg",
+    "/bgrImg/image-6.jpg",
+    "/bgrImg/image-7.jpg",
+    "/bgrImg/image-8.jpg",
+    "/bgrImg/image-9.jpg",
+    "/bgrImg/image-10.jpg",
+    "/bgrImg/image-11.jpg",
+    "/bgrImg/image-12.jpg",
+    "/bgrImg/image-13.jpg",
+    "/bgrImg/image-14.jpg",
+    "/bgrImg/image-15.jpg",
+    "/bgrImg/image-16.jpg",
+    "/bgrImg/image-17.jpg",
+    "/bgrImg/image-18.jpg",
+    "/bgrImg/image-19.jpg",
+    "/bgrImg/image-20.jpg",
 ];
 
 export default function Login(props) {
@@ -61,7 +61,7 @@ export default function Login(props) {
                         "VALIDATION FAILED:",
                         error.response.data.errors
                     );
-                    setErrors(error.response.data.errors)
+                    setErrors(error.response.data.errors);
                     break;
                 case 500:
                     console.log("UNKNOWN ERROR", error.response.data);
@@ -79,25 +79,30 @@ export default function Login(props) {
         });
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
+    //     }, 5000);
 
-        return () => clearInterval(interval);
-    }, []); 
+    //     return () => clearInterval(interval);
+    // }, []);
 
     return (
-        <div className="auth-body"
-        style={{
-            backgroundImage: `url(${images[backgroundImg]})`,
-        }}
+        <div
+            className="auth-body"
+            style={{
+                backgroundImage: `url(${images[backgroundImg]})`,
+            }}
         >
             <div className="auth-wrapper">
                 <div className="auth-header">
-                    <h1 className="auth-header-text">Welcome back</h1>
+                    <h1 className="auth-header-text">
+                        Welcome to <span className="title-blue">C</span>
+                        <span className="title-black">B</span>
+                        <span className="title-red">P</span> MAIL
+                    </h1>
                     <p className="auth-detail-text">
-                        Please enter your details
+                        Please enter your login details
                     </p>
                 </div>
 
@@ -127,7 +132,7 @@ export default function Login(props) {
                     <button>Login</button>
                 </form>
                 <div className="auth-link">
-                    <p>Dont Have an Account?</p>
+                    <p>Not registered yet?</p>
                     <p>
                         <Link className="auth-link-button" to="/register">
                             Sign up
