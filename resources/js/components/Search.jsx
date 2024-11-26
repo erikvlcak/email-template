@@ -24,16 +24,19 @@ export default function Search({
     };
 
     const handleSelectedFolder = () => {
-        if (selectedFolder == 1) {
-            return "Search in Inbox";
-        } else if (selectedFolder == 2) {
-            return "Search in Sent";
-        } else if (selectedFolder == 3) {
-            return "Search in All";
-        } else if (selectedFolder == 4) {
-            return "Search in Drafts";
-        } else {
-            return "Search in Starred";
+        switch (selectedFolder) {
+            case 1:
+                return "Search in Inbox";
+            case 2:
+                return "Search in Sent";
+            case 3:
+                return "Search in All";
+            case 4:
+                return "Search in Drafts";
+            case 5:
+                return "Search in Trash";
+            default:
+                return "Search in Favorites";
         }
     };
 
