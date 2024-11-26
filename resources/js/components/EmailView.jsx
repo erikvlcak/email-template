@@ -86,6 +86,7 @@ const EmailView = ({
                     onClose={handleCloseEditor}
                     initialEmail={selectedEmail.recipients[0]?.receiver_email}
                     initialSubject={`Re: ${selectedEmail.subject}`}
+                    initialContent={selectedEmail.body}
                 />
             )}
         </div>

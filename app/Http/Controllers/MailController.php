@@ -16,16 +16,21 @@ class MailController extends Controller
 {
     public function sendEmail(Request $request)
     {
+
+        $emailFolder = $request->input('folder_id');
+
+        if($emailFolder == 2){
         $request->validate([
             'address' => 'required|email',
             'subject' => 'required',
             'text' => 'required',
         ]);
+    };
 
         $recipientEmail = $request->input('address');
         $emailSubject = $request->input('subject');
         $emailContent = $request->input('text');
-        $emailFolder = $request->input('folder_id');
+        
 
         // Extract plain text from HTML content
         $plainTextContent = strip_tags($emailContent);
@@ -140,5 +145,12 @@ class MailController extends Controller
         $email = Email::findOrFail($id);
         $email->delete();
         return response()->json(['message' => 'Email deleted successfully!']);
+    }
+
+    public function markAsRead(Request $request, $id)
+    {
+        $isRead = Recipient::findOrFail($id);
+        $isRead->update(['is_read' => $request->input('is_read')]);
+        return response()->json(['message' => 'Email status updated successfully!']);
     }
 }

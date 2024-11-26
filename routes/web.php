@@ -15,6 +15,7 @@ Route::get('/sent', [MailController::class, 'sent'])->name('emails.sent');
 Route::get('/api/fetch-inbox', [MailController::class, 'fetchInbox']);
 Route::get('/api/emails', [MailController::class, 'getEmails']);
 Route::get("/api/user", [UserController::class, "getCurrentUser"])->name("user.get");
+Route::patch('api/emails/{id}/mark-as-read', [MailController::class, 'markAsRead']);
 
 Route::view('/login', 'index')->name('login');
 Route::view('/{path?}', 'index')->where('path', '^((?!admin).)*$');

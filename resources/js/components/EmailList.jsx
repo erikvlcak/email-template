@@ -16,10 +16,12 @@ export default function EmailList({
     return (
         <>
             {loading ? (
-                <div>Loading emails...</div>
+                <div className="loading-circle">
+                    <div className="spinner"></div>
+                </div>
             ) : (
                 displayedEmails.map((email, index) => (
-                    <li
+                    <li className={email.recipients[0].is_read == 0 ? ("email-item-open") : ("email-item") }
                         onClick={(e) => {
                             if (
                                 e.target.type !== "checkbox" &&
@@ -29,7 +31,7 @@ export default function EmailList({
                             }
                         }}
                         key={email.id}
-                        className="email-item"
+                        
                     >
                         <input
                             className="email-checkbox"
