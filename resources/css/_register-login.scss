@@ -137,6 +137,9 @@ h6 {
     display: flex;
     height: 100vh;
     align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .signup-form-content {
