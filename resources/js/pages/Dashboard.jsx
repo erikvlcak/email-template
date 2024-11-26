@@ -132,6 +132,9 @@ const Dashboard = () => {
         }
     };
 
+
+
+
     const displayedEmails = emails.filter((item) =>
 
         selectedFolder == 1 ? 
@@ -143,6 +146,7 @@ const Dashboard = () => {
                     (selectedFolder == "starred" ? ((item.user.id == user?.id || item?.recipients[0]?.receiver_email == user?.email) && (item.is_starred == 1) && (item?.recipients[0]?.receiver_email != null)):
                     (null))))))
                     
+
     );
 
 
@@ -178,6 +182,7 @@ const Dashboard = () => {
                                 <div>
                                     <strong>{selectedEmails.length} </strong>
                                     selected
+
                                 </div>
                             </div>
 

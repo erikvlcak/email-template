@@ -17,11 +17,22 @@
     background-color: white;
     width: 500px;
     font-size: 1.5rem;
+    padding: 5px 10px;
+    border: 2px solid $black;
+    border-radius: 15px;
+}
+
+.search-input-active {
+    border-radius: 15px 15px 0px 0px;
+    background-color: white;
+    width: 500px;
+    font-size: 1.5rem;
     padding: 5px;
     border: 2px solid $black;
 }
 
-.search-input:focus {
+.search-input:focus,
+.search-input-active:focus {
     outline: none;
     border: 2px solid $black;
 }
@@ -105,10 +116,12 @@
     right: 0;
     top: 0;
     user-select: none;
-
+    color: $red;
     cursor: pointer;
+    z-index: 1000;
+}
 
-    .pfp-letter-icon {
-        color: $red;
-    }
+.trash-button {
+    background-color: $red;
+    color: white;
 }

@@ -175,24 +175,22 @@ input[type="checkbox"]:checked::after {
     font-weight: 700;
     font-size: 1rem;
     border-left: 0px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
     border-bottom-color: $black;
     border-right-color: $black;
     border-top-color: $black;
     color: white;
+    box-shadow: 0px 1px 5px $black;
 }
 
 .navigation button:hover,
 .navigation button.active {
-    background-color: $blue;
-    color: white;
+    // background-color: $blue;
     border-color: $black;
     font-weight: 700;
+    background-color: $blue;
+    //background-color: linear-gradient(90deg, $black, $blue);
 }
-
-// .navigation button.active:hover {
-//     background: ;
-// }
 
 .sidebar {
     display: flex;
@@ -258,7 +256,6 @@ input[type="checkbox"]:checked::after {
 .email-list {
     margin-top: 10rem; /* Adjust this value based on the height of the fixed top elements */
     overflow-y: auto;
-
     height: fit-content;
 }
 
@@ -271,16 +268,19 @@ input[type="checkbox"]:checked::after {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 10px 10px;
-    border-bottom: 1px solid #ddd;
+    background-color: #3333330f;
     gap: 1rem;
-    width: 80vw;
+    width: 100%;
     cursor: pointer;
-    background-color: rgb(233, 233, 233);
+    margin-bottom: 0.2rem;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 .email-item:hover {
     background-color: $blue;
-    border-radius: 10px;
+    border-radius: 15px;
     // border-bottom: none;
 }
 
@@ -319,14 +319,14 @@ input[type="checkbox"]:checked::after {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: $blue;
-    color: $red;
+    background-color: $black;
+    color: white;
     border: none;
     box-shadow: 0px 0px 5px $black;
     border-radius: 50%;
     border: 2px solid $black;
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     font-size: 5rem;
     cursor: pointer;
     display: flex;
@@ -398,6 +398,10 @@ input[type="checkbox"]:checked::after {
     color: white;
 }
 
+
+.email-date {
+    margin-left: auto;
+
 .email-item-open{
     display: flex;
     color: $black;
@@ -437,4 +441,5 @@ input[type="checkbox"]:checked::after {
     100% {
         transform: rotate(360deg);
     }
+
 }

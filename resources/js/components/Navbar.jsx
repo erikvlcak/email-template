@@ -24,7 +24,7 @@ export default function Navbar({
                     className={activeButton === "starred" ? "active" : ""}
                     onClick={() => {handleFolderClick("starred"); fetchEmails(selectedFolder)}}
                 >
-                    Starred
+                    Favorite
                 </button>
                 <button
                     className={activeButton === 2 ? "active" : ""}
