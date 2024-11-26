@@ -113,7 +113,7 @@ export default function Register(props) {
                 >
                     <div className="signup-form-top">
                         <div className="fname">
-                            <label htmlFor="firstname">First Name: </label>
+                            <label htmlFor="firstname">First Name</label>
                             <input
                                 type="text"
                                 className="fname"
@@ -126,7 +126,7 @@ export default function Register(props) {
                         </div>
 
                         <div className="lname">
-                            <label htmlFor="lastname">Last Name: </label>
+                            <label htmlFor="lastname">Last Name</label>
                             <input
                                 type="text"
                                 name="lastname"
@@ -139,7 +139,7 @@ export default function Register(props) {
                         </div>
 
                         <div className="email">
-                            <label htmlFor="email">Email: </label>
+                            <label htmlFor="email">Email</label>
                             <input
                                 type="email"
                                 name="email"
@@ -154,7 +154,7 @@ export default function Register(props) {
 
                     <div className="signup-form-bottom">
                         <div className="phone">
-                            <label htmlFor="phone">Phone: </label>
+                            <label htmlFor="phone">Phone</label>
                             <input
                                 type="text"
                                 name="phone"
@@ -167,7 +167,7 @@ export default function Register(props) {
                         </div>
 
                         <div className="password">
-                            <label htmlFor="password">Password: </label>
+                            <label htmlFor="password">Password</label>
                             <input
                                 type="password"
                                 name="password"
@@ -181,7 +181,7 @@ export default function Register(props) {
 
                         <div className="password-confirm">
                             <label htmlFor="password_confirmation">
-                                Confirm password:{" "}
+                                Confirm password
                             </label>
                             <input
                                 type="password"
