@@ -28,7 +28,7 @@ h6 {
     padding: 2rem;
     background-color: #f1f1f1;
     border: 2px solid $black;
-    gap: 2rem;
+    gap: 1rem;
 
     .auth-header {
         display: flex;
@@ -90,7 +90,8 @@ h6 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
+    width: 80%;
 
     input {
         border: 2px solid $black;
@@ -107,8 +108,10 @@ h6 {
     }
 
     button {
+        margin-top: 1rem;
         background-color: $black;
         border: none;
+        width: 100%;
         border-radius: 15px;
         padding: 1rem 5rem;
         color: white;
