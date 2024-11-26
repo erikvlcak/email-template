@@ -112,7 +112,7 @@ export default function Login(props) {
                     method="post"
                     onSubmit={handleSubmit}
                 >
-                    <div className="auth-error">{errors?.email}</div>
+                    <label htmlFor="email">Email</label>
                     <input
                         type="email"
                         name="email"
@@ -120,7 +120,8 @@ export default function Login(props) {
                         value={values.email}
                         onChange={handleChange}
                     />
-                    <div className="auth-error">{errors?.password}</div>
+                    <div className="auth-error">{errors?.email}</div>
+                    <label htmlFor="email">Password</label>
                     <input
                         type="password"
                         name="password"
@@ -129,6 +130,7 @@ export default function Login(props) {
                         onChange={handleChange}
                     />
 
+                    <div className="auth-error">{errors?.password}</div>
                     <button>Login</button>
                 </form>
                 <div className="auth-link">
