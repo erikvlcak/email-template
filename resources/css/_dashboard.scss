@@ -152,8 +152,8 @@ input[type="checkbox"]:checked::after {
 .navigation {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 3rem;
+    gap: 1.5rem;
+    margin-top: 4rem;
 }
 
 .top-options {
@@ -161,9 +161,9 @@ input[type="checkbox"]:checked::after {
 }
 
 .navigation button {
-    background-color: $black;
+    background-color: white;
     border: none;
-    padding: 10px 0;
+    padding: 1rem 0;
     cursor: pointer;
     text-align: left;
     padding-left: 1rem;
@@ -179,8 +179,8 @@ input[type="checkbox"]:checked::after {
     border-bottom-color: $black;
     border-right-color: $black;
     border-top-color: $black;
-    color: white;
-    box-shadow: 0px 1px 5px $black;
+    color: $black;
+    // box-shadow: 0px 1px 5px $black;
 }
 
 .navigation button:hover,
@@ -189,6 +189,7 @@ input[type="checkbox"]:checked::after {
     border-color: $black;
     font-weight: 700;
     background-color: $blue;
+    color: white;
     //background-color: linear-gradient(90deg, $black, $blue);
 }
 
@@ -259,7 +260,8 @@ input[type="checkbox"]:checked::after {
     height: fit-content;
 }
 
-.email-item {
+.email-item,
+.email-item-open {
     display: flex;
     color: $black;
     justify-content: start;
@@ -277,7 +279,8 @@ input[type="checkbox"]:checked::after {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.email-item:hover {
+.email-item:hover,
+.email-item-open:hover {
     background-color: $blue;
     border-radius: 15px;
     // border-bottom: none;
@@ -384,36 +387,46 @@ input[type="checkbox"]:checked::after {
 .editor-buttons .send {
     flex: 2;
     background-color: $blue;
+    padding: 1rem 0;
+    border: 2px solid white;
+    cursor: pointer;
     color: white;
+    transition: border 0.3s ease;
     &:hover {
-        box-shadow: 3px 3px solid $black;
+        border: 2px solid $black;
     }
 }
 
 .editor-buttons .draft {
     flex: 1;
     background-color: $black;
+    border: 2px solid white;
     color: white;
+    cursor: pointer;
+    transition: border 0.3s ease;
+    &:hover {
+        border: 2px solid $red;
+    }
 }
 
 .email-date {
     margin-left: auto;
 }
 
-.email-item-open {
-    display: flex;
-    color: $black;
-    justify-content: start;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 10px 10px;
-    border-bottom: 1px solid #ddd;
-    gap: 1rem;
-    width: 80vw;
-    cursor: pointer;
-}
+// .email-item-open {
+//     display: flex;
+//     color: $black;
+//     justify-content: start;
+//     align-items: center;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     padding: 10px 10px;
+//     border-bottom: 1px solid #ddd;
+//     gap: 1rem;
+//     width: 80vw;
+//     cursor: pointer;
+// }
 
 .loading-circle {
     display: flex;

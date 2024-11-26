@@ -101,7 +101,11 @@ export default function Register(props) {
         >
             <div className="signup-form-content">
                 <div className="">
-                    <h1 className="">Sign Up</h1>
+                    <h1 className="">
+                        Sign Up to <span className="title-blue">C</span>
+                        <span className="title-black">B</span>
+                        <span className="title-red">P</span> MAIL
+                    </h1>
                     <p className="">Please enter your details</p>
                 </div>
 
