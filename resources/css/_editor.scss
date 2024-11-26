@@ -28,11 +28,6 @@ button {
     transition: background-color 0.3s ease;
 }
 
-.button-submit:hover {
-    background-color: gold;
-    color: black;
-}
-
 .editor__input {
     border: 0px;
     border-bottom: 1px solid gray;
@@ -135,4 +130,8 @@ button {
     display: flex;
     flex-direction: column;
     min-height: 11rem;
+}
+
+.ck-editor__editable p {
+    text-align: start;
 }

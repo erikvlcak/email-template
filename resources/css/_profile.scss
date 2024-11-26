@@ -54,7 +54,7 @@
             cursor: pointer;
 
             &:hover {
-                background-color: $blue;
+                background-color: $black;
                 color: white;
             }
         }
@@ -62,9 +62,12 @@
 
     .close-icon {
         position: absolute;
-        top: 0;
-        right: 5px;
+        top: 0px;
+        right: 10px;
 
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
         font-size: 1.5rem;
         cursor: pointer;
         //border: 1px solid black;
