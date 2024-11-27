@@ -84,13 +84,13 @@ export default function Register(props) {
         });
     };
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
-    //     }, 5000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
+        }, 5000);
 
-    //     return () => clearInterval(interval);
-    // }, []);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div
