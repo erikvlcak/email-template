@@ -8,7 +8,7 @@ const Editor = ({
     onClose,
     initialEmail = "",
     initialSubject = "",
-    initialContent = ""
+    initialContent = "",
 }) => {
     const [email, setEmail] = useState(initialEmail);
     const [subject, setSubject] = useState(initialSubject);
@@ -34,7 +34,7 @@ const Editor = ({
             onEmailSent(); // Refresh the email list in Dashboard
             onClose(); // Close the editor window
         } catch (error) {
-            setStatus("Failed to send email.");
+            console.log("Failed to send email.");
         }
     };
 
