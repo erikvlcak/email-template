@@ -69,11 +69,13 @@ const EmailView = ({
                     </tr>
                 </tbody>
             </table>
+            <hr />
             {selectedEmail.html ? (
                 <div dangerouslySetInnerHTML={{ __html: selectedEmail.html }} />
             ) : (
                 <div>{selectedEmail.body}</div>
             )}
+            <hr />
             <button
                 className="email-view__respond-button"
                 onClick={handleRespondClick}

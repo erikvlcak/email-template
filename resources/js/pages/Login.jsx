@@ -82,7 +82,7 @@ export default function Login(props) {
     useEffect(() => {
         const interval = setInterval(() => {
             setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
+        }, 15000);
 
         return () => clearInterval(interval);
     }, []);
