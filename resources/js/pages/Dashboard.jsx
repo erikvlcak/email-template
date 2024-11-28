@@ -187,6 +187,7 @@ const Dashboard = () => {
                     <div className="top-options">
                         <div className="top-select-info">
                             <button
+                                className="button-selectAll"
                                 onClick={() =>
                                     handleSelectAllEmails(displayedEmails)
                                 }
@@ -224,7 +225,7 @@ const Dashboard = () => {
                                             </button>
 
                                             <button
-                                                className="button-delete"
+                                                className="button-restore"
                                                 onClick={() =>
                                                     moveEmailsToFolder(3)
                                                 }

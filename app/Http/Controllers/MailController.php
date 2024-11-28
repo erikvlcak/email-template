@@ -19,18 +19,18 @@ class MailController extends Controller
 
         $emailFolder = $request->input('folder_id');
 
-        if($emailFolder == 2){
-        $request->validate([
-            'address' => 'required|email',
-            'subject' => 'required',
-            'text' => 'required',
-        ]);
-    };
+        if ($emailFolder == 2) {
+            $request->validate([
+                'address' => 'required|email',
+                'subject' => 'required',
+                'text' => 'required',
+            ]);
+        };
 
         $recipientEmail = $request->input('address');
         $emailSubject = $request->input('subject');
         $emailContent = $request->input('text');
-        
+
 
         // Extract plain text from HTML content
         $plainTextContent = strip_tags($emailContent);

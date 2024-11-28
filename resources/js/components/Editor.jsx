@@ -41,7 +41,7 @@ const Editor = ({
     return (
         <div className="editor-window">
             <div>
-                <h2>New Message</h2>
+                <h2>{subject ? subject : "New message"}</h2>
                 <div className="close-button" onClick={onClose}>
                     X
                 </div>
