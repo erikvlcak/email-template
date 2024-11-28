@@ -272,7 +272,7 @@ input[type="checkbox"]:checked::after {
     padding: 10px 10px;
     background-color: #3333330f;
     gap: 1rem;
-    width: 100%;
+    width: 80vw;
     cursor: pointer;
     margin-bottom: 0.2rem;
     border-radius: 15px;
@@ -455,4 +455,20 @@ input[type="checkbox"]:checked::after {
 
 .email-list p {
     text-align: start;
+}
+
+.button-restore {
+    margin-left: 1rem;
+    &:hover {
+        background-color: $blue;
+        color: white;
+    }
+}
+
+.button-selectAll {
+    &:hover {
+        background-color: $black;
+
+        color: white;
+    }
 }
