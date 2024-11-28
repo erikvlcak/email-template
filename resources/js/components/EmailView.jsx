@@ -80,7 +80,7 @@ const EmailView = ({
                 className="email-view__respond-button"
                 onClick={handleRespondClick}
             >
-                Respond
+                Reply
             </button>
             {isEditorVisible && (
                 <Editor
