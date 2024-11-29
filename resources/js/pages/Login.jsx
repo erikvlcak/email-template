@@ -79,13 +79,13 @@ export default function Login(props) {
         });
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
-        }, 15000);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setBackgroundImg((prevIndex) => (prevIndex + 1) % images.length);
+    //     }, 15000);
 
-        return () => clearInterval(interval);
-    }, []);
+    //     return () => clearInterval(interval);
+    // }, []);
 
     return (
         <div

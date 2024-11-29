@@ -116,6 +116,8 @@ const Editor = ({
                         className="draft"
                         onClick={() => {
                             setFolderId(4);
+                            onEmailSent();
+                            onClose();
                         }}
                     >
                         Save to drafts
