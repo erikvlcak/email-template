@@ -43,7 +43,7 @@ function Profile({ handleProfileButton }) {
                     onClick={() => handleLogout("/register")}
                     className="profile-button switch"
                 >
-                    Switch accounts
+                    Add new account
                 </button>
                 <button
                     className="profile-button logout"

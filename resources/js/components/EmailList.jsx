@@ -20,6 +20,7 @@ export default function EmailList({
                     <div className="spinner"></div>
                 </div>
             ) : (
+            displayedEmails.length > 0 ? (
                 displayedEmails.map((email, index) => (
                     <li className={email.recipients[0].is_read == 0 ? ("email-item-open") : ("email-item") }
                         onClick={(e) => {
@@ -67,6 +68,9 @@ export default function EmailList({
                         <div className="email-date">{formatDate(email.created_at)}</div>
                     </li>
                 ))
+                ) : (
+                    <div className="empty-folder">Folder is empty</div>
+                )
             )}
         </>
     );
