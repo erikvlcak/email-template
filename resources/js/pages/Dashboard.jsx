@@ -19,8 +19,23 @@ const Dashboard = () => {
     const [selectedEmails, setSelectedEmails] = useState([]);
     const [activeButton, setActiveButton] = useState(1); // Default to Inbox
     //const [isRead, setIsRead] = useState(false);
+    const [showConfirmButtons, setShowConfirmButtons] = useState(false);
 
     const navigate = useNavigate();
+
+    const handleMoveToTrashClick = () => {
+        setShowConfirmButtons(true);
+    };
+
+    const handleConfirmMoveToTrash = () => {
+        moveEmailsToFolder(5);
+        setShowConfirmButtons(false);
+    };
+
+    const handleCancelMoveToTrash = () => {
+        setSelectedEmails([]);
+        setShowConfirmButtons(false);
+    };
 
     const fetchEmails = async (folderId) => {
         try {
@@ -58,6 +73,7 @@ const Dashboard = () => {
     };
 
     const handleFolderClick = (folderId) => {
+        setShowConfirmButtons(false);
         setSelectedFolder(folderId);
         setSelectedEmail(null); // Reset selected email when changing folders
         setSelectedEmails([]); // Reset selected emails when changing folders
@@ -205,13 +221,39 @@ const Dashboard = () => {
                             {selectedEmails.length > 0 && (
                                 <div className="top-move-buttons">
                                     {selectedFolder !== 5 && (
-                                        <button
-                                            onClick={() =>
-                                                moveEmailsToFolder(5)
-                                            }
-                                        >
-                                            Move selected to Trash
-                                        </button>
+                                        <>
+                                            <button
+                                                className="button-move"
+                                                onClick={() => {
+                                                    handleMoveToTrashClick();
+                                                }}
+                                            >
+                                                Move selected to Trash
+                                            </button>
+                                            {showConfirmButtons && (
+                                                <>
+                                                    <button
+                                                        className="button-confirm"
+                                                        onClick={() => {
+                                                            handleConfirmMoveToTrash;
+                                                            moveEmailsToFolder(
+                                                                5
+                                                            );
+                                                        }}
+                                                    >
+                                                        Confirm
+                                                    </button>
+                                                    <button
+                                                        className="button-cancel"
+                                                        onClick={
+                                                            handleCancelMoveToTrash
+                                                        }
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </>
+                                            )}
+                                        </>
                                     )}
                                     {selectedFolder == 5 && (
                                         <div className="trash-buttons">

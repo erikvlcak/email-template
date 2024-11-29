@@ -350,8 +350,8 @@ input[type="checkbox"]:checked::after {
     border: 2px solid #ccc;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    height: 500px;
+    width: 50vw;
+    height: 80vh;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -375,6 +375,45 @@ input[type="checkbox"]:checked::after {
 
 .editor-content .ck-editor__editable {
     flex: 1;
+}
+
+.button-move {
+    background-color: white;
+    color: $black;
+    border: 2px solid $red;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:hover {
+        background-color: $red;
+        color: white;
+    }
+}
+
+.button-confirm {
+    background-color: white;
+    color: $black;
+    border: 2px solid $red;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:hover {
+        background-color: $red;
+        color: white;
+    }
+}
+
+.button-cancel {
+    background-color: white;
+    color: $black;
+    border: 2px solid $blue;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:hover {
+        background-color: $blue;
+        color: white;
+    }
 }
 
 .editor-buttons {
@@ -471,4 +510,9 @@ input[type="checkbox"]:checked::after {
 
         color: white;
     }
+}
+
+.ck-content > p {
+    margin: 0;
+    padding: 0;
 }

@@ -1,10 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&display=swap");
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 2px solid black;
+  font-weight: 400;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .main-container {
   font-family: "Lato";
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+}
+
+.button-submit {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .editor__input {
@@ -13,6 +30,7 @@
   width: 100%;
   padding: 1rem 0 0.5rem 0;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
 .editor__input:focus {
@@ -23,29 +41,12 @@
   font-family: "Lato";
   line-height: 1.6;
   word-break: break-word;
-}
-
-.ck-content > p:nth-child(1) {
-  min-height: 200px;
+  height: 800px;
 }
 
 .editor-container_classic-editor .editor-container__editor {
   min-width: 795px;
   max-width: 795px;
-}
-
-.compose-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
 }
 
 .editor-window {
@@ -56,27 +57,38 @@
   border: 1px solid #ccc;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 50vw;
+  width: 80vw;
   height: 80vh;
   z-index: 1000;
   display: flex;
   flex-direction: column;
+  border-radius: 15px;
 }
 
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: none;
-  border: none;
-  font-size: 16px;
   cursor: pointer;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .editor-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  border: 0px;
 }
 
 .editor-content .ck-editor__editable_inline {
@@ -95,13 +107,123 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 16rem;
+}
+
+.ck-editor__editable p {
+  text-align: start;
+}
+
+.email-view__respond-button {
+  background-color: #333333;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  transition: background-color 0.3s ease;
+}
+.email-view__respond-button:hover {
+  background-color: #49addf;
+}
+
+:root {
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.title-red {
+  color: #ff0000;
+}
+
+.title-blue {
+  color: #49addf;
+}
+
+.title-black {
+  color: #333333;
+}
+
+button {
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #333333;
+  font-weight: 400;
+  font-size: 1rem;
+  background-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-delete:hover {
+  background-color: #ff0000;
+  color: white;
+}
+
+.top-select-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem 0;
+  gap: 1rem;
+}
+
+.select-all-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-options {
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+  height: 3rem;
+}
+
+.top-move {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+input[type=checkbox] {
+  min-width: 20px; /* Increase the width of the checkbox */
+  min-height: 20px; /* Increase the height of the checkbox */
+  cursor: pointer;
+  border-radius: 50%; /* Make the checkbox rounded */
+  appearance: none; /* Remove default checkbox styling */
+  background-color: white; /* Set the background color */
+  border: 2px solid #333333; /* Set the border color */
+  position: relative;
+  padding-right: 17px;
+}
+
+input[type=checkbox]:checked {
+  background-color: #333333; /* Change background color when checked */
+}
+
+input[type=checkbox]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 10px; /* Adjust the size of the checkmark */
+  min-height: 10px; /* Adjust the size of the checkmark */
+  background-color: #333333; /* Set the checkmark color */
+  border-radius: 50%; /* Make the checkmark rounded */
+  transform: translate(-50%, -50%); /* Center the checkmark */
+}
+
+.top-move-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .star {
@@ -111,13 +233,13 @@ body {
   min-width: 2rem;
   height: 2rem;
   cursor: pointer;
-  color: rgba(128, 128, 128, 0.108);
+  color: rgba(128, 128, 128, 0.456);
   text-align: center;
   font-size: 30px;
 }
 
 .star.starred {
-  color: rgb(253, 194, 15);
+  color: #333333;
 }
 
 .dashboard {
@@ -131,45 +253,70 @@ body {
 
 .sidebar {
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 200px;
   height: 100%;
   background-color: #f1f1f1;
   padding: 1rem 1rem 1rem 0;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border: 0;
+  border-right: 2px solid #333333;
+  box-shadow: 1px 4px 10px;
 }
 
 .sidebar h2 {
   margin-top: 0;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.top-options {
+  display: flex;
 }
 
 .navigation button {
-  background: none;
+  background-color: white;
   border: none;
-  padding: 10px 0;
+  padding: 1rem 0;
   cursor: pointer;
   text-align: left;
   padding-left: 1rem;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  border: 2px solid gainsboro;
-  font-weight: bold;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border: 2px solid;
+  font-weight: 700;
   font-size: 1rem;
+  border-left: 0px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-bottom-color: #333333;
+  border-right-color: #333333;
+  border-top-color: #333333;
+  color: #333333;
 }
 
+.navigation button:hover,
 .navigation button.active {
-  font-weight: bold;
+  border-color: #333333;
+  font-weight: 700;
+  background-color: #49addf;
+  color: white;
 }
 
-.navigation button:hover {
-  background-color: #ddd;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 220px;
 }
 
 .sidebar ul {
@@ -187,6 +334,29 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  border: 0px;
+}
+
+.refresh-button {
+  background: none;
+  border: none;
+  padding: 10px 0;
+  cursor: pointer;
+  text-align: left;
+  padding-left: 1rem;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border: 2px solid black;
+  font-weight: bold;
+  font-size: 1rem;
+  border-left: 0px;
+}
+
+.refresh-button:hover {
+  background-color: #000000;
+  color: white;
 }
 
 .fixed-top {
@@ -196,8 +366,11 @@ body {
   right: 0;
   background-color: #f1f1f1;
   z-index: 1000;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border: 0px;
+  border-bottom: 2px solid #333333;
+  border-right: #f1f1f1;
+  box-shadow: 4px 1px 10px;
 }
 
 .email-list {
@@ -206,22 +379,29 @@ body {
   height: fit-content;
 }
 
-.email-item {
+.email-item,
+.email-item-open {
   display: flex;
+  color: #333333;
   justify-content: start;
   align-items: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+  padding: 10px 10px;
+  background-color: rgba(51, 51, 51, 0.0588235294);
   gap: 1rem;
   width: 80vw;
   cursor: pointer;
+  margin-bottom: 0.2rem;
+  border-radius: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.email-item:hover {
-  background-color: #f9f9f9;
+.email-item:hover,
+.email-item-open:hover {
+  background-color: #49addf;
+  border-radius: 15px;
 }
 
 .email-subjectAndBody {
@@ -242,18 +422,41 @@ body {
   color: rgba(0, 0, 0, 0.7960784314);
 }
 
+.email-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.email-view__return-button,
+.email-view__respond-button {
+  width: fit-content;
+}
+
 .compose-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #007bff;
+  background-color: #333333;
   color: white;
   border: none;
+  box-shadow: 0px 0px 5px #333333;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
+  border: 2px solid #333333;
+  width: 90px;
+  height: 90px;
+  font-size: 5rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.compose-button:hover {
+  transform: rotate(180deg);
 }
 
 .editor-window {
@@ -261,24 +464,14 @@ body {
   bottom: 20px;
   right: 20px;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 500px;
-  height: 500px;
+  width: 50vw;
+  height: 80vh;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .editor-content {
@@ -291,22 +484,160 @@ body {
   flex: 1;
 }
 
-input {
-  width: 50%;
-  padding: 1rem;
-  border-radius: 15px;
+.button-move {
+  background-color: white;
+  color: #333333;
+  border: 2px solid #ff0000;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.button-move:hover {
+  background-color: #ff0000;
+  color: white;
+}
+
+.button-confirm {
+  background-color: white;
+  color: #333333;
+  border: 2px solid #ff0000;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.button-confirm:hover {
+  background-color: #ff0000;
+  color: white;
+}
+
+.button-cancel {
+  background-color: white;
+  color: #333333;
+  border: 2px solid #49addf;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.button-cancel:hover {
+  background-color: #49addf;
+  color: white;
+}
+
+.editor-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  user-select: none;
+}
+
+.editor-buttons .send {
+  flex: 2;
+  background-color: #49addf;
+  padding: 1rem 0;
+  border: 2px solid white;
+  cursor: pointer;
+  color: white;
+  transition: border 0.3s ease;
+}
+.editor-buttons .send:hover {
+  border: 2px solid #333333;
+}
+
+.editor-buttons .draft {
+  flex: 1;
+  background-color: #333333;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+.editor-buttons .draft:hover {
+  border: 2px solid #ff0000;
+}
+
+.email-date {
+  margin-left: auto;
+}
+
+.loading-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.email-list p {
+  text-align: start;
+}
+
+.button-restore {
+  margin-left: 1rem;
+}
+.button-restore:hover {
+  background-color: #49addf;
+  color: white;
+}
+
+.button-selectAll:hover {
+  background-color: #333333;
+  color: white;
+}
+
+.ck-content > p {
+  margin: 0;
+  padding: 0;
 }
 
 .page-top {
   display: flex;
-  justify-content: space-between;
+  position: relative;
+  height: 3rem;
+  margin-bottom: 1rem;
 }
 
-.searchBar {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.logo-cbp {
+  cursor: pointer;
+}
+
+.search-input {
+  background-color: white;
+  width: 500px;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border: 2px solid #333333;
+  border-radius: 15px;
+}
+
+.search-input-active {
+  border-radius: 15px 15px 0px 0px;
+  background-color: white;
+  width: 500px;
+  font-size: 1.5rem;
+  padding: 5px;
+  border: 2px solid #333333;
+}
+
+.search-input:focus,
+.search-input-active:focus {
+  outline: none;
+  border: 2px solid #333333;
 }
 
 .profile {
@@ -315,20 +646,116 @@ input {
   gap: 1rem;
 }
 
+.searched-mails {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  align-content: flex-start;
+  width: fit-content;
+  position: absolute;
+  top: 100%;
+  width: 500px;
+  border-radius: 0px 0px 15px 15px;
+  max-height: 20rem;
+}
+.searched-mails .mail {
+  background-color: white;
+  height: fit-content;
+  padding: 0.3rem;
+  border-left: 2px solid #333333;
+  border-right: 2px solid #333333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.searched-mails .mail:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.searched-mails .search-query {
+  background-color: white;
+  border-top: 1px solid black;
+  height: fit-content;
+  padding: 0.3rem;
+  border-radius: 0px 0px 15px 15px;
+  border-bottom: 2px solid #333333;
+  border-left: 2px solid #333333;
+  border-right: 2px solid #333333;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.searched-mails .mail-no-results {
+  background-color: white;
+  border-bottom: 2px solid #333333;
+  border-left: 2px solid #333333;
+  border-right: 2px solid #333333;
+  height: fit-content;
+  padding: 0.5rem;
+  border-radius: 0px 0px 15px 15px;
+  font-size: larger;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-pfp-icon {
+  border-radius: 50%;
+  border: 2px solid #333333;
+  background-color: #49addf;
+  height: 4rem;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  position: absolute;
+  right: 0;
+  top: 0;
+  user-select: none;
+  color: #ff0000;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.trash-button {
+  background-color: #ff0000;
+  color: white;
+}
+
 body {
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
 .auth-wrapper {
+  margin: 0 auto;
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  border-radius: 2rem;
-  min-width: 30rem;
+  border-radius: 15px;
   padding: 2rem;
-  opacity: 0.95;
+  background-color: #f1f1f1;
+  border: 2px solid #333333;
+  gap: 1rem;
 }
 .auth-wrapper .auth-header {
   display: flex;
@@ -336,6 +763,8 @@ body {
 }
 .auth-wrapper .auth-header .auth-header-text {
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 .auth-wrapper .auth-header .auth-detail-text {
   text-align: center;
@@ -344,11 +773,19 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 50%;
+  width: 90%;
 }
 .auth-wrapper .auth-link-button {
   text-decoration: none;
-  color: #04AA6D;
+  background-color: transparent;
+  border-radius: 10px;
+  color: #333333;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.auth-wrapper .auth-link-button:hover {
+  background-color: #49addf;
+  color: white;
 }
 .auth-wrapper ::placeholder {
   font-size: 1rem;
@@ -358,13 +795,15 @@ body {
 .auth-body {
   align-items: center;
   display: flex;
-  height: 92vh;
-  background-color: blue;
-  margin: 0;
-  padding: 2rem;
+  height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  transition: all 1s ease-in-out;
+}
+
+.auth-body.fade {
+  opacity: 0;
 }
 
 .auth-form {
@@ -372,80 +811,213 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  gap: 0.75rem;
-  width: 100%;
+  gap: 1rem;
+  width: 80%;
 }
 .auth-form input {
-  height: 3rem;
-  width: 80%;
-  border: 1px solid lightcoral;
-  border-radius: 10px;
+  border: 2px solid #333333;
+  border-radius: 15px;
+  width: 100%;
+  font-weight: 500;
+  background-color: #f1f1f1;
+  padding: 1rem;
 }
-.auth-form input placeholder {
-  color: #04AA6D;
+.auth-form input:focus {
+  background-color: white;
+  outline: none;
 }
 .auth-form button {
-  background-color: #04AA6D;
+  margin-top: 1rem;
+  background-color: #333333;
   border: none;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 1rem 5rem;
   color: white;
-  padding: 15px 32px;
+  font-size: 1.5rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.auth-form button:hover {
+  background-color: #49addf;
+}
+.auth-form .auth-error {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  margin: -0.5rem;
 }
 
-.development {
+.signup-body {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.signup-form-content {
+  background-color: #f1f1f1;
+  margin: 0 auto;
+  height: fit-content;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid #333333;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signup-form input {
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid #333333;
+}
+.signup-form input:focus {
+  background-color: white;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 0.8rem;
+}
+
+h1,
+p {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.signup-form-top,
+.signup-form-bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.signup-form-top div,
+.signup-form-bottom div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 0.3rem;
+  gap: 0.3rem;
+}
+
+.signup-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.signup-register-btn {
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 100%;
+  outline: none;
+  color: white;
+  background-color: #333333;
+}
+.signup-register-btn:hover {
+  background-color: #49addf;
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+a:hover {
+  color: white;
+  background-color: #49addf;
+}
+
+.profile-component {
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   background-color: #f1f1f1;
-  border-radius: 2rem;
-  min-width: 20rem;
-  padding: 2rem;
+  border-radius: 15px;
+  padding: 1rem 2rem;
   position: absolute;
   box-shadow: 1px 1px 5px;
   top: 1rem;
-  right: 1rem;
+  right: 0;
 }
-.development .profile-details {
+.profile-component .profile-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: default;
+  height: fit-content;
 }
-.development .profile-details .profile-pfp {
+.profile-component .profile-details .profile-pfp {
   border-radius: 50%;
-  background-color: lightgreen;
+  background-color: #49addf;
   height: 7rem;
   width: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 5rem;
+  font-weight: 800;
+  border: 2px solid #333333;
+  color: #ff0000;
 }
-.development .profile-details .profile-pfp .pfp-letter {
-  color: coral;
-}
-.development .profile-functionality {
+.profile-component .profile-functionality {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  height: fit-content;
+  width: fit-content;
 }
-.development .profile-functionality button {
-  height: 3rem;
-  width: 80%;
-  border: 1px solid lightcoral;
-  border-radius: 10px;
+.profile-component .profile-functionality .profile-button {
+  padding: 1rem 1.5rem;
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid #333333;
+  border-width: 2px;
   background-color: white;
-  margin: 1rem 1rem 1rem 1rem;
+  cursor: pointer;
 }
-.development .profile-functionality button:hover {
-  background-color: lightcoral;
+.profile-component .profile-functionality .profile-button:hover {
+  background-color: #333333;
   color: white;
+}
+.profile-component .close-icon {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
 }

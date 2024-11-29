@@ -1,16 +1,13 @@
-.logo-cbp {
-    &:hover {
-        background-color: black;
-        color: white;
-        cursor: pointer;
-    }
-}
 .page-top {
     display: flex;
     position: relative;
     //background-color: red;
     height: 3rem;
     margin-bottom: 1rem;
+}
+
+.logo-cbp {
+    cursor: pointer;
 }
 
 .search-input {
