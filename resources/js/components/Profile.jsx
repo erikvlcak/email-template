@@ -40,7 +40,7 @@ function Profile({ handleProfileButton }) {
 
             <div className="profile-functionality">
                 <button
-                    onClick={() => handleLogout("/register")}
+                    onClick={() => handleLogout("/login")}
                     className="profile-button switch"
                 >
                     Switch accounts
