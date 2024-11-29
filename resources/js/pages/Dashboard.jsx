@@ -60,7 +60,7 @@ const Dashboard = () => {
     const markEmailAsRead = async (emailId) => {
         try {
             await axios.patch(`/api/emails/${emailId}/mark-as-read`, {
-                is_read: true, // Mark the email as read
+                is_read: true, 
             });
             console.log("Email marked as read");
         } catch (error) {

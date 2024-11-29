@@ -149,7 +149,7 @@ class MailController extends Controller
 
     public function markAsRead(Request $request, $id)
     {
-        $isRead = Recipient::findOrFail($id);
+        $isRead = Email::findOrFail($id);
         $isRead->update(['is_read' => $request->input('is_read')]);
         return response()->json(['message' => 'Email status updated successfully!']);
     }
