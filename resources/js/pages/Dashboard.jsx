@@ -254,7 +254,7 @@ const Dashboard = () => {
                         <EmailView
                             selectedFolder={selectedFolder}
                             selectedEmail={selectedEmail}
-                            setSelectedEmail={setSelectedEmail}
+                            onEmailSent={() => fetchEmails(selectedFolder)}
                             formatDate={formatDate}
                         />
                     ) : (
